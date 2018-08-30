@@ -1,0 +1,188 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,700,900');
+@import "scss/variables"; // TODO/XXX: When we use this, the row max-width gets all screwed up
+@import "scss/vendor/global";
+@import "scss/vendor/foundation";
+@include foundation-everything;
+
+nav, #page-title, #main, footer, #flashes, #verify_sms {
+    background-color: #000;
+}
+
+a {
+    font-weight: bold;
+}
+
+
+.header {
+  text-align: center;
+  background-image: url(./images/headerbg.png);
+  background-size: contain;
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: visible;
+  padding-top: $header-height;
+  padding-bottom: $header-height + ($subnav-link-padding * 2 + $subnav-font-size - 0.15rem);
+  //margin-bottom: 0.5rem;
+
+  .header-text {
+    font-family: "Rubik", sans-serif;
+    text-transform: uppercase;;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    h1 { font-size: 1.5 * $h1-font-size; }
+    h2 { font-size: 1.5 * $h2-font-size; }
+    h3 { font-size: 1.5 * $h3-font-size; }
+    font-weight: bold;
+  }
+
+  .headline {
+    color: #ffe;
+  }
+
+  a {
+    color: #ffe;
+  }
+}
+
+.header-subnav {
+  float: none;
+  position:relative;
+  text-align: center;
+  margin: 0 auto;
+  bottom: 0;
+  width: 100%;
+
+  li {
+    float: none;
+    display: inline-block;
+
+    a {
+      padding: $subnav-link-padding 1rem;
+      font-size: $subnav-font-size;
+      color: #ffe;
+      text-transform: uppercase;
+      display: block;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: $transition;
+
+      &.is-active {
+        background: rgba(250,250,250,$subnav-link-opacity);
+      }
+
+      &:hover {
+        background: rgba(250,250,250,$subnav-link-opacity);
+        transition: $transition;
+      }
+    }
+  }
+}
+
+#logo {
+    padding-bottom: 2em;
+    text-align: center;
+    h1 {
+        font-size: 3rem;
+        margin: 2rem 0 0;
+    }
+    h2 {
+        font-size: 5rem;
+        margin: 0;
+    }
+    h3 {
+        font-size: 2rem;
+        margin: 0 0 2rem;
+    }
+}
+
+#user {
+    text-align: right;
+}
+
+#copyright {
+    text-align: center;
+}
+
+.message-box {
+    display: block;
+    border: 0px solid;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #fff;
+    color: #000;
+    &.error {
+        background-color: map-get($foundation-palette, alert);
+        border: 3px solid darken(map-get($foundation-palette, alert), 20);
+    }
+    &.warning {
+        background-color: map-get($foundation-palette, warning);
+        border: 3px solid darken(map-get($foundation-palette, warning), 20);
+    }
+    &.success {
+        background-color: map-get($foundation-palette, success);
+        border: 3px solid darken(map-get($foundation-palette, success), 20);
+    }
+    &.info {
+        background-color: #b3dfef;
+        border: 3px solid #1313f3;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: $body-font-family;
+    }
+}
+
+#flashes {
+    ul {
+        margin: 0;
+    }
+    li {
+        @extend .message-box;
+        margin: 0.5em 0;
+    }
+}
+
+p.small, li.small {
+    font-size: 0.75rem;
+}
+
+table .button {
+    margin: 0;
+}
+
+#give_tickets,
+#refund_transaction {
+    input {
+        display: inline;
+        &[type="number"] {
+            width: 5rem;
+        }
+        &[type="text"] {
+            width: auto;
+        }
+    }
+}
+
+#dashboard h3 .button {
+    margin: 0;
+    position: relative;
+    top: -0.25rem;
+}
+
+.upload_photo {
+    margin-bottom: 1rem;
+    .large-9 {
+        padding-top: 2rem;
+    }
+}
+
+#validate_ticket #holder_photo img {
+    display: block;
+    margin: auto;
+    max-height: 500px;
+}

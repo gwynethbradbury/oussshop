@@ -1,0 +1,231 @@
+{#<!DOCTYPE HTML>#}
+{#<html>#}
+{#<head>#}
+{#<title>Welcome</title>#}
+{#<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />#}
+{#<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />#}
+{#</head>#}
+{#<body>#}
+{#<div id="title">#}
+{#	<a href="/">#}
+{#		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />#}
+{#	</a>#}
+{#	<form>#}
+{#		<input id="searchBox" type="text" name="searchQuery">#}
+{#		<input id="searchButton" type="submit" value="Search">#}
+{#	</form>#}
+{##}
+{#	{% if not loggedIn %}#}
+{#	<div id="signInButton">#}
+{#		<a class="link" href="/loginForm">Sign In</a>#}
+{#	</div>#}
+{#	{% else %}#}
+{#	<div class="dropdown">#}
+{#		<button class="dropbtn">Hello, <br>{{firstName}}</button>#}
+{#		<div class="dropdown-content">#}
+{#			<a href="/account/orders">Your orders</a>#}
+{#			<a href="/account/profile">Your profile</a>#}
+{#			<hr>#}
+{#			<a href="/logout">Sign Out</a>#}
+{#		</div>#}
+{#	</div>#}
+{#	{% endif %}#}
+{#	<div id="kart">#}
+{#		<a class="link" href="/cart">#}
+{#			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />#}
+{#			CART {{noOfItems}}#}
+{#		</a>#}
+{#	</div>#}
+{#</div>#}
+{#<div class="display">#}
+{#	<div class="displayCategory">#}
+{#		<h2>Shop by Category: </h2>#}
+{#		<ul>#}
+{#			{% for row in categoryData %}#}
+{#			<li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>#}
+{#			{% endfor %}#}
+{#		</ul>#}
+{#	</div>#}
+{#	<div>#}
+{#		<h2>Items</h2>#}
+{#		{% for data in itemData %}#}
+{#		<table>#}
+{#			<tr id="productName">#}
+{#				{% for row in data %}#}
+{#				<td>#}
+{#					{{row[1]}}#}
+{#				</td>#}
+{#				{% endfor %}#}
+{#			</tr>#}
+{#			<tr id="productImage">#}
+{#				{% for row in data %}#}
+{#				<td>#}
+{#					<a href="/productDescription?productId={{row[0]}}">#}
+{#						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />#}
+{#					</a>#}
+{#				</td>#}
+{#				{% endfor %}#}
+{#			</tr>#}
+{#			<tr id="productPrice">#}
+{#				{% for row in data %}#}
+{#				<td>#}
+{#					${{row[2]}}#}
+{#				</td>#}
+{#				{% endfor %}#}
+{#			</tr>#}
+{#		</table>#}
+{#		{% endfor %}#}
+{#	</div>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+<!-- front/home.html -->
+{% extends 'layout.html' %}
+
+{% block title %}<div class="scrollDestination">Welcome</div>{% endblock %}
+
+{% block content %}
+
+{#    <div class="col col-sm-12 col-lg-12 col-md-12">#}
+
+{#        <p>#}
+{#            Welcome to the {{ template_config['BALL_NAME'] }} ticketing page.#}
+{#            From here, you can#}
+{#            purchase, manage, and trade tickets.#}
+{#            If you have any problems while using#}
+{#            the system, please contact <a href="{{ template_config['TICKETS_EMAIL_LINK'] }}">the ticketing officer</a>.#}
+{#        </p>#}
+{#        <p>#}
+{#            The {{ template_config['TITLE'] }} will take place on the night of {{ template_config['START_TIME'].strftime('%A %B') }} {{ template_config['START_TIME'].day }}{{ get_ord(template_config['START_TIME']) }}.#}
+{#            Limited tickets will be available on the door on a first come first served basis. To purchase a ticket, please register or log in.#}
+{#        </p>#}
+{#    </div>#}
+    <div class="row">
+        <div class="col col-sm-12 col-lg-6 col-md-12">
+            <h2>Log In</h2>
+            <form action="{{ url_for('shop.do_login') }}" method="post">
+                {% if request.args['next'] %}
+                    <input type="hidden" name="next" value="{{ request.args['next'] }}" />
+                {% endif %}
+                <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" name="email" id="login-email" />
+                </div>
+                <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" name="password" id="login-password" />
+                </div>
+                <div class="form-group">
+                        <input type="checkbox" value="yes" name="remember-me" id="login-remember" />
+                        <label for="login-remember">Remember Me</label>
+                </div>
+                <div class="form-group">
+                        <input type="submit" value="Log In" class="button expanded large" />
+                </div>
+            </form>
+            <br />
+            <h4>Can't log in?</h4>
+            <ul id="login-help">
+{#                <li><a href="{{ url_for('shop.password_reset') }}">Reset your password</a></li>#}
+{#                <li><a href="{{ url_for('shop.email_confirm') }}">Confirm your email</a></li>#}
+            </ul>
+{#            </section>#}
+{#            <section id="homepage-register" class="large-7 columns">#}
+        </div>
+        <div class="col col-sm-12 col-lg-6 col-md-12">
+{##}
+            <h2>Register</h2>
+{#                <p>If you are a {{ template_config['COLLEGE'] }} student, you must use your university email address in order to be able to pay by battels.</p>#}
+            <form action="{{ url_for('shop.register') }}" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                        <label for="register-forenames">Forename(s)</label>
+                        <input type="text" name="forenames" id="register-forenames"{% if form['forenames'] %} value="{{ form['forenames'] }}"{% endif %} />
+                </div>
+                <div class="form-group">
+                        <label for="register-surname">Surname</label>
+                        <input type="text" name="surname" id="register-surname"{% if form['surname'] %} value="{{ form['surname'] }}"{% endif %} />
+                </div>
+                <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" name="email" id="register-email"{% if form['email'] %} value="{{ form['email'] }}"{% endif %} />
+                </div>
+                <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" name="password" id="register-password" />
+                </div>
+                <div class="form-group">
+                        <label for="register-confirm">Confirm Password</label>
+                        <input type="password" name="confirm" id="register-confirm" />
+                </div>
+                <div class="form-group">
+                        <label for="register-phone">Phone Number</label>
+                        <input type="text" name="phone" id="register-phone"{% if form['phone'] %} value="{{ form['phone'] }}"{% endif %} />
+                </div>
+                <div class="form-group">
+                        <label for="register-college">College</label>
+                        <select name="college" id="register-college">
+                            {% if form['college'] %}
+                                <option value="---" disabled="disabled">---</option>
+                            {% else %}
+                                <option value="---" disabled="disabled" selected="selected">---</option>
+                            {% endif %}
+                            {% for college in colleges %}
+                                {% if form['college'] and form['college']|int(-1) == college.object_id %}
+                                    <option value="{{ college.object_id }}" selected="selected">{{ college.name }}</option>
+                                {% else %}
+                                    <option value="{{ college.object_id }}">{{ college.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                </div>
+                <div class="form-group">
+                        <label for="register-affiliation">Affiliation</label>
+                        <select name="affiliation" id="register-affiliation">
+                            {% if form['affiliation'] %}
+                                <option value="---" disabled="disabled">---</option>
+                            {% else %}
+                                <option value="---" disabled="disabled" selected="selected">---</option>
+                            {% endif %}
+                            {% for affiliation in affiliations %}
+                                {% if form['affiliation'] and form['affiliation']|int(-1) == affiliation.object_id %}
+                                    <option value="{{ affiliation.object_id }}" selected="selected">{{ affiliation.name }}</option>
+                                {% else %}
+                                    <option value="{{ affiliation.object_id }}">{{ affiliation.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                </div>
+                {% if template_config['REQUIRE_USER_PHOTO'] %}
+                    <div class="form-group">
+                            <label for="photo">Upload Photo</label>
+                            <div class="row upload_photo">
+                                <div class="large-9 columns">
+                                    <input type="file" name="photo" accept="{{ template_config['IMAGE_ACCEPT_STRING'] }}" required="required" />
+                                    <p class="small">Please upload a passport style photograph of yourself.</p>
+                                </div>
+                            </div>
+
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                        <label for="accept_terms">
+                            <input type="checkbox" name="accept_terms" value="yes" id="accept_terms" required />
+                            I have read and accept the <a href="{{ url_for('shop.terms') }}" target="_blank">{{ template_config['TITLE'] }} Terms &amp; Conditions</a>
+                        </label>
+                </div>
+                <div class="form-group">
+                        <input type="submit" value="Register" class="button expanded large" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
