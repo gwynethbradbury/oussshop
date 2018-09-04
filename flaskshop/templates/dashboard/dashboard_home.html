@@ -6,6 +6,12 @@
 {% block content %}
     <section id="dashboard" class="columns">
         <h3>Your tickets</h3>
+        {% if current_user.prepaid_classes > 0 %}
+            Prepaid classes: {{ current_user.prepaid_classes }}
+        {% else %}
+            <p>You have no prepaid classes. Perhaps you'd like to <a href="{{ url_for('shop.shop') }}">buy some</a>?</p>
+        {% endif%}
+
 {#        {% if current_user.has_held_ticket() %}#}
 {#            <p>You will use the following ticket for entry into the ball.</p>#}
 {#            <table class="table" id="tickets_table">#}
@@ -43,11 +49,11 @@
         {% endif %}
 
         {% if current_user.has_unpaid_memberships() %}
-        <p>You currently hold tickets which have not been paid for. Please follow the links below. Failure to pay before the ticket system closes will mean you will pay the full door price.</p>
+        <p>You membership has not been paid for. Please follow the links below. </p>
         {% endif %}
 
         {% if current_user.has_paid_memberships() %}
-        <p>You {% if current_user.has_unpaid_tickets() %}also {% endif %}have paid for tickets, these are shown below.</p>
+        <p>You {% if current_user.has_unpaid_tickets() %}also {% endif %}have paid for membership, this is shown below.</p>
         {% endif %}
 
         <h4>Memberships You Own</h4>
@@ -55,8 +61,8 @@
             <table class="table" id="tickets_table">
                 <thead>
                     <tr>
-                        <th>Ticket Number</th>
-                        <th>Ticket Status</th>
+                        <th>Mamber Number</th>
+                        <th>Member Status</th>
                         <!--<th>Ticket Claim Code</th>-->
                         <!--<th>Actions</th>-->
                         <th>Assign Ticket</th>
@@ -65,19 +71,8 @@
                 <tbody>
                     {% for ticket in current_user.memberships %}
                         <tr id="ticket-{{ ticket.object_id }}">
-                            <td>#{{ '%05d' % ticket.object_id }}
-                              {% if ticket.note != None and 'Upgrade' in ticket.note %}
-                              , Upgraded
-                              {% endif %}</td>
+                            <td>#{{ '%05d' % ticket.object_id }}</td>
                             <td>{{ ticket.status }}</td>
-{#                            <td>#}
-{#                                {% if not ticket.cancelled %}#}
-{#                                    {% if ticket.holder == None %}#}
-{#                                        {{ ticket.claim_code }}#}
-{#                                    {% else %}#}
-{#                                        Ticket has been claimed by {{ ticket.holder.full_name }}.#}
-{#                                    {% endif %}#}
-{#                                {% endif %} </td>#}
                             <td>
                                 {% if not ticket.cancelled %}
                                     {% if not ticket.paid %}
@@ -87,15 +82,6 @@
 
                                     {% if ticket.is_assigned() %}
                                         {{ ticket.holder_name }}
-                                    {% else %}
-                                        <form action="{{ url_for('dashboard.assign_ticket') }}" method="post">
-                                            <input type="hidden" name="claim_code" value="{{ ticket.claim_code }}" />
-                                            <input type="text" name="new_holder_name" placeholder="{{ ticket.holder_name }}" required/>
-                                            <input type="submit" value="Assign" class="button tiny" />
-                                        </form>
-                                    {% endif %}
-                                    {% if ticket.can_be_reclaimed() %}
-                                        <a href="{{ url_for('dashboard.reclaim_ticket', ticket_id=ticket.object_id) }}" class="button tiny">Reclaim</a>
                                     {% endif %}
                                 {% endif %}
                             </td>

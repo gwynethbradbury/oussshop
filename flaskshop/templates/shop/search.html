@@ -1,20 +1,12 @@
+
 {% extends 'shoplayout.html' %}
 
-{% block title %}Shop{% endblock %}
+{% block title %}Search{% endblock %}
 
 
 {% block content %}
 
-	<div class="displayCategory">
-		<h2>Shop by Category: </h2>
-		<ul>
-			{% for cat in categoryData %}
-            <li><a href="/displayCategory?categoryId={{cat.name}}">{{cat.name}}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<h2>Items</h2>
+		<h2>Search result for "{{searchterm}}"</h2>
 		{% for data in itemData %}
 		<table>
 			<tr id="productName">
@@ -38,6 +30,4 @@
 			</tr>
 		</table>
 		{% endfor %}
-	</div>
-
 {% endblock %}

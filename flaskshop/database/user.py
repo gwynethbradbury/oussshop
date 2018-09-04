@@ -69,6 +69,11 @@ class User(DB.Model):
         nullable=False,
         default=False
     )
+    prepaid_classes = DB.Column(
+        DB.Integer,
+        nullable=False,
+        default=0
+    )
     secret_key = DB.Column(
         DB.Unicode(64),
         nullable=True

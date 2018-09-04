@@ -2,30 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe08ee5e-cfa1-4745-9c40-8bf527d1f68c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/cart.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/category.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/products.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/shop.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flaskshop/dbconfig.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flaskshop/templates/displayCategory.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/flaskshop/templates/cart.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/cart.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/flaskshop/templates/productDescription.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/static/css/cart.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/static/css/home.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/static/css/productDescription.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/static/css/remove.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/static/css/topStyle.css" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/flaskshop/static/images/favicon.ico" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/flaskshop/templates/add.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/add.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/flaskshop/templates/remove.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/remove.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/static/images/banner.jpg" afterPath="$PROJECT_DIR$/flaskshop/static/images/banner.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/app.py" afterPath="$PROJECT_DIR$/flaskshop/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/config/default.py" afterPath="$PROJECT_DIR$/flaskshop/config/default.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/membership.py" afterPath="$PROJECT_DIR$/flaskshop/database/membership.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/models.py" afterPath="$PROJECT_DIR$/flaskshop/database/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/static/images/favicon.jpg" afterPath="$PROJECT_DIR$/flaskshop/static/images/favicon.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/user.py" afterPath="$PROJECT_DIR$/flaskshop/database/user.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/scripts/create_qr_codes.py" afterPath="$PROJECT_DIR$/flaskshop/scripts/create_qr_codes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/system.py" afterPath="$PROJECT_DIR$/flaskshop/system.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/blocks/dashboard-navigation.html" afterPath="$PROJECT_DIR$/flaskshop/templates/blocks/dashboard-navigation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html" afterPath="$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/index.html" afterPath="$PROJECT_DIR$/flaskshop/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html" afterPath="$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/layout.html" afterPath="$PROJECT_DIR$/flaskshop/templates/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/shop/home.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/views/all_views.py" afterPath="$PROJECT_DIR$/flaskshop/views/all_views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/shop/cart.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/cart.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/templates/shop/shop.html" afterPath="$PROJECT_DIR$/flaskshop/templates/shop/shop.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/views/dashboard.py" afterPath="$PROJECT_DIR$/flaskshop/views/dashboard.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/views/shop.py" afterPath="$PROJECT_DIR$/flaskshop/views/shop.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setupdb.py" afterPath="$PROJECT_DIR$/setupdb.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,122 +32,139 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shop.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/views/shop.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-593">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#68#107#0" expanded="true" />
-                <element signature="e#2590#2897#0" expanded="false" />
-                <element signature="e#2967#4096#0" expanded="false" />
-                <element signature="e#4139#4462#0" expanded="false" />
-                <element signature="e#4513#4993#0" expanded="false" />
-                <element signature="e#6035#6068#0" expanded="false" />
-                <element signature="e#14237#14261#0" expanded="false" />
-                <element signature="e#16276#16365#0" expanded="false" />
-                <element signature="e#16388#16621#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setupdb.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setupdb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13">
-              <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/views/dashboard.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-              <folding>
-                <element signature="e#54#93#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="system.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/system.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="all_views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/views/all_views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/database/user.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="166" column="87" lean-forward="true" selection-start-line="166" selection-start-column="87" selection-end-line="166" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create_qr_codes.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/scripts/create_qr_codes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-              <folding>
-                <element signature="e#16#55#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard_home.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="45" column="85" lean-forward="false" selection-start-line="45" selection-start-column="85" selection-end-line="45" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard-navigation.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/templates/blocks/dashboard-navigation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index-navigation.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="shop.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/views/shop.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="410">
+                  <caret line="87" column="12" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+                  <folding>
+                    <element signature="e#68#107#0" expanded="true" />
+                    <element signature="e#3199#3290#0" expanded="false" />
+                    <element signature="e#3341#3572#0" expanded="false" />
+                    <element signature="e#5147#5180#0" expanded="false" />
+                    <element signature="e#15387#15476#0" expanded="false" />
+                    <element signature="e#15499#15732#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/home.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="233">
+                  <caret line="32" column="27" lean-forward="true" selection-start-line="32" selection-start-column="27" selection-end-line="36" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/add.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="105">
+                  <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="shoplayout.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/shoplayout.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="184">
+                  <caret line="103" column="50" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="201" selection-end-column="7" />
+                  <folding>
+                    <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="dashboard.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/views/dashboard.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-456">
+                  <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#54#93#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="dashboard_home.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-812">
+                  <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="195">
+                  <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/login.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index-navigation.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="45">
+                  <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="shop.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/shop.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="layout.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/flaskshop/templates/layout.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="498">
+                  <caret line="201" column="7" lean-forward="false" selection-start-line="201" selection-start-column="7" selection-end-line="201" selection-end-column="7" />
+                  <folding>
+                    <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -185,6 +199,13 @@
       <find>eisiti</find>
       <find>write</find>
       <find>held_mem</find>
+      <find>barcore</find>
+      <find>UPLOAD_FOLDER</find>
+      <find>account</find>
+      <find>order</find>
+      <find>search</find>
+      <find>login-email</find>
+      <find>sear</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -200,32 +221,37 @@
         <option value="$PROJECT_DIR$/flaskshop/views/all_views.py" />
         <option value="$PROJECT_DIR$/flaskshop/database/category.py" />
         <option value="$PROJECT_DIR$/flaskshop/templates/shop/home.html" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/layout.html" />
         <option value="$PROJECT_DIR$/flaskshop/templates/index.html" />
         <option value="$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/shop/shop.html" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html" />
         <option value="$PROJECT_DIR$/flaskshop/database/models.py" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/shop/cart.html" />
         <option value="$PROJECT_DIR$/flaskshop/database/cart.py" />
         <option value="$PROJECT_DIR$/flaskshop/database/products.py" />
         <option value="$PROJECT_DIR$/flaskshop/config/default.py" />
         <option value="$PROJECT_DIR$/flaskshop/database/membership.py" />
         <option value="$PROJECT_DIR$/setupdb.py" />
         <option value="$PROJECT_DIR$/flaskshop/system.py" />
-        <option value="$PROJECT_DIR$/flaskshop/views/shop.py" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/blocks/dashboard-navigation.html" />
         <option value="$PROJECT_DIR$/flaskshop/database/user.py" />
         <option value="$PROJECT_DIR$/flaskshop/views/dashboard.py" />
-        <option value="$PROJECT_DIR$/flaskshop/templates/blocks/dashboard-navigation.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/dashboard/profile.html" />
         <option value="$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/remove.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/cart.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/search.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/shop.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shoplayout.html" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/shop/add.html" />
+        <option value="$PROJECT_DIR$/flaskshop/views/shop.py" />
+        <option value="$PROJECT_DIR$/flaskshop/templates/layout.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1680" />
-    <option name="height" value="987" />
+    <option name="width" value="1440" />
+    <option name="height" value="837" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -292,6 +318,13 @@
               <item name="oussshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="oussshop" type="462c0819:PsiDirectoryNode" />
               <item name="flaskshop" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="shop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oussshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oussshop" type="462c0819:PsiDirectoryNode" />
+              <item name="flaskshop" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -313,6 +346,10 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/flaskshop/static/images" />
+      <recent name="$PROJECT_DIR$/flaskshop/static/css" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/flaskshop/templates/shop" />
     </key>
@@ -389,19 +426,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1680" height="987" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="22" width="1440" height="837" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17678571" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39346406" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24836601" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -419,12 +455,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/flaskshop/database/user.py</url>
-          <line>264</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/flaskshop/views/shop.py</url>
-          <line>276</line>
+          <line>264</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -438,27 +470,12 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/flaskshop/views/dashboard.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/flaskshop/views/dashboard.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/flaskshop/views/all_views.py</url>
-          <line>20</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/flaskshop/views/dashboard.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/flaskshop/views/shop.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="22" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -466,46 +483,12 @@
         <watch expression="BCRYPT.generate_password_hash(password)" language="Python" />
         <watch expression="len(self.password_hash)" language="Python" />
         <watch expression="user.object_id" language="Python" />
+        <watch expression="os.path" language="Python" />
+        <watch expression="request" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flaskshop/database/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbconfig.py" />
-    <entry file="file:///usr/local/lib/python2.7/site-packages/bcrypt/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="58" column="4" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/site-packages/flask_bcrypt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="135" column="8" lean-forward="false" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/config/payment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/config/production.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/site-packages/flask/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -556,14 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11070">
-          <caret line="763" column="0" lean-forward="false" selection-start-line="763" selection-start-column="0" selection-end-line="763" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/site-packages/flask/templating.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1905">
@@ -576,63 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/Cellar/python/2.7.13_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="133" column="36" lean-forward="false" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="56" column="21" lean-forward="false" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/shop.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="62" column="82" lean-forward="false" selection-start-line="62" selection-start-column="82" selection-end-line="62" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -652,28 +570,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/database/cart.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#60#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/site-packages/sqlalchemy/orm/state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="302" column="0" lean-forward="false" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/cart.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="72" lean-forward="false" selection-start-line="51" selection-start-column="72" selection-end-line="51" selection-end-column="72" />
           <folding />
         </state>
       </provider>
@@ -726,16 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/database/products.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding>
-            <element signature="e#60#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/site-packages/flask/globals.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -752,14 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flaskshop/views/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -772,14 +654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/views/all_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -803,7 +677,7 @@
     <entry file="file://$PROJECT_DIR$/flaskshop/system.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
-          <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
+          <caret line="79" column="40" lean-forward="false" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -813,41 +687,89 @@
         <state relative-caret-position="184">
           <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
           <folding>
-            <element signature="e#16#55#0" expanded="true" />
+            <element signature="e#16#55#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/views/shop.py">
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-593">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="59">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/database/products.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
-            <element signature="e#68#107#0" expanded="true" />
-            <element signature="e#2590#2897#0" expanded="false" />
-            <element signature="e#2967#4096#0" expanded="false" />
-            <element signature="e#4139#4462#0" expanded="false" />
-            <element signature="e#4513#4993#0" expanded="false" />
-            <element signature="e#6035#6068#0" expanded="false" />
-            <element signature="e#14237#14261#0" expanded="false" />
-            <element signature="e#16276#16365#0" expanded="false" />
-            <element signature="e#16388#16621#0" expanded="false" />
+            <element signature="e#60#99#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/static/css/cart.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/views/all_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/2.7.13_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/socket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="1597" column="0" lean-forward="false" selection-start-line="1597" selection-start-column="0" selection-end-line="1597" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/cart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/displayCategory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/productDescription.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flaskshop/templates/blocks/index-navigation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/database/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="166" column="87" lean-forward="true" selection-start-line="166" selection-start-column="87" selection-end-line="166" selection-end-column="87" />
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -860,21 +782,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/database/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="263" column="13" lean-forward="true" selection-start-line="263" selection-start-column="13" selection-end-line="263" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/remove.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/database/cart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#60#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/shop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-812">
+          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="32" column="27" lean-forward="true" selection-start-line="32" selection-start-column="27" selection-end-line="36" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shop/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/views/shop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="87" column="12" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+          <folding>
+            <element signature="e#68#107#0" expanded="true" />
+            <element signature="e#3199#3290#0" expanded="false" />
+            <element signature="e#3341#3572#0" expanded="false" />
+            <element signature="e#5147#5180#0" expanded="false" />
+            <element signature="e#15387#15476#0" expanded="false" />
+            <element signature="e#15499#15732#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flaskshop/views/dashboard.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        <state relative-caret-position="-456">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="e#54#93#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/templates/dashboard/dashboard_home.html">
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/shoplayout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="45" column="85" lean-forward="false" selection-start-line="45" selection-start-column="85" selection-end-line="45" selection-end-column="85" />
-          <folding />
+        <state relative-caret-position="184">
+          <caret line="103" column="50" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="201" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="201" column="7" lean-forward="false" selection-start-line="201" selection-start-column="7" selection-end-line="201" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#nav#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

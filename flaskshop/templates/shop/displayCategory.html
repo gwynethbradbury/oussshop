@@ -1,44 +1,10 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Category: {{categoryName}}</title>
-<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
-<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
-</head>
-<body>
-<div id="title">
-	<a href="/">
-		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
-	</a>
-	<form>
-		<input id="searchBox" type="text" name="searchQuery">
-		<input id="searchButton" type="submit" value="Search">
-	</form>
+{% extends 'shoplayout.html' %}
 
-	{% if not loggedIn %}
-	<div id="signInButton">
-		<a class="link" href="/loginForm">Sign In</a>
-	</div>
-	{% else %}
-	<div class="dropdown">
-		<button class="dropbtn">Hello, <br>{{firstName}}</button>
-		<div class="dropdown-content">
-			<a href="/account/orders">Your orders</a>
-			<a href="/account/profile">Your profile</a>
-			<hr>
-			<a href="/logout">Sign Out</a>
-		</div>
-	</div>
-	{% endif %}
-	<div id="kart">
-		<a class="link" href="/cart">
-			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
-			CART {{noOfItems}}
-		</a>
-	</div>
-</div>
+{% block title %}{{categoryName}}{% endblock %}
 
-<div>
+
+{% block content %}
+
 	<h2>Showing all products of Category {{categoryName}}:</h2>
 	{% for itemData in data %}
 	<table>
@@ -54,8 +20,9 @@
 			<td>
 				<a href="/productDescription?productId={{product.object_id}}">
 					{% if product.photo == None %}
+						<img src={{ url_for('static', filename='images/ouss.png' ) }} id="itemImage" />
 					{%else%}
-					<img src={{ url_for('static', filename='uploads/' + product.photo.object_id ) }} id="itemImage" />
+						<img src={{ url_for('static', filename='uploads/' + product.photo.filename ) }} id="itemImage" />
 					{%endif%}
 				</a>
 			</td>
@@ -70,6 +37,5 @@
 		</tr>
 	</table>
 	{% endfor %}
-</div>
-</body>
-</html>
+
+{% endblock %}

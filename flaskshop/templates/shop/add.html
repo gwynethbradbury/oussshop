@@ -1,0 +1,42 @@
+{% extends 'shoplayout.html' %}
+
+{% block title %}Add Item{% endblock %}
+
+
+{% block content %}
+<form action="/addItem" method="POST" enctype="multipart/form-data">
+
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" name="name" id="name"/>
+	</div>
+	<div class="form-group">
+		<label for="price">Price</label>
+		<input type="text" name="price" id="price"/>
+	</div>
+	<div class="form-group">
+		<label for="description">Description</label><br/>
+		<textarea name="description" rows=3 cols="40" id="description"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="image">Image</label>
+		<input type="file" name="image" id="image"/>
+	</div>
+	<div class="form-group">
+		<label for="stock">Stock</label>
+		<input type="text" name="stock" id="stock"/>
+	</div>
+	<div class="form-group">
+		<label for="category">Category</label>
+		<select name="category" id="category">
+		{% for row in categories %}
+			<option value="{{row.object_id}}">{{row.name}}</option>
+		{% endfor %}
+		</select><br>
+	</div>
+	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+
+</form>
+
+
+{% endblock %}

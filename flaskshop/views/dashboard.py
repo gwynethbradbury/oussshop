@@ -42,9 +42,9 @@ def dashboard_home():
 @login.login_required
 def profile():
     """Show the user's personal details."""
-    if not login.current_user.dietary_requirements:
-        DB.session.add(models.DietaryRequirements(login.current_user))
-        DB.session.commit()
+    # if not login.current_user.dietary_requirements:
+    #     DB.session.add(models.DietaryRequirements(login.current_user))
+    #     DB.session.commit()
 
     return flask.render_template(
         'dashboard/profile.html',

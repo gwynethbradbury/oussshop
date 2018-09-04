@@ -31,7 +31,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'random string'
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = '/Users/Gwyneth/Documents/repositories/oussshop/flaskshop/static/uploads'
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -42,20 +42,6 @@ def getLoginDetails():
         return True, login.current_user.forenames,count
     else:
         return False, 'Guest',0
-    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-    #     #conn = conn.cursor()
-    #     if 'email' not in session:
-    #         loggedIn = False
-    #         firstName = ''
-    #         noOfItems = 0
-    #     else:
-    #         loggedIn = True
-    #         conn.execute("SELECT userId, firstName FROM users WHERE email = '" + session['email'] + "'")
-    #         userId, firstName = conn.fetchone()
-    #         conn.execute("SELECT count(productId) FROM kart WHERE userId = " + str(userId))
-    #         noOfItems = conn.fetchone()[0]
-    # conn.close()
-    # return (loggedIn, firstName, noOfItems)
 
 @SHOP.route("/shop")
 def shop():
@@ -77,11 +63,7 @@ def shop():
 
 @SHOP.route("/add")
 def admin():
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        conn.execute("SELECT categoryId, name FROM categories")
-        categories = conn.fetchall()
-    conn.close()
+    categories = models.Category.query.all()
     return render_template('shop/add.html', categories=categories)
 
 @SHOP.route("/addItem", methods=["GET", "POST"])
@@ -95,47 +77,54 @@ def addItem():
 
         #Uploading image procedure
         image = request.files['image']
+        p = models.Product(name,categoryId,description,price)
+
         if image and allowed_file(image.filename):
             filename = secure_filename(image.filename)
             image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        imagename = filename
-        with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-            try:
-                #conn = conn.cursor()
-                conn.execute('''INSERT INTO products (name, price, description, image, stock, categoryId) VALUES (?, ?, ?, ?, ?, ?)''', (name, price, description, imagename, stock, categoryId))
-                conn.commit()
-                msg="added successfully"
-            except:
-                msg="error occured"
-                conn.rollback()
-        conn.close()
-        print(msg)
-        return redirect(url_for('root'))
+            im = models.Photo(filename,
+                              os.path.join(app.config['UPLOAD_FOLDER'],filename),
+                              os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            p.photo=im
+        p.stock=stock
+        try:
+            DB.session.add(p)
+            DB.session.commit()
+        except Exception as e:
+            print(e)
+        return redirect(url_for('shop.shop'))
 
 @SHOP.route("/remove")
 def remove():
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        conn.execute('SELECT productId, name, price, description, image, stock FROM products')
-        data = conn.fetchall()
-    conn.close()
+    data = models.Product.query.all()
     return render_template('shop/remove.html', data=data)
 
 @SHOP.route("/removeItem")
 def removeItem():
     productId = request.args.get('productId')
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        try:
-            #conn = conn.cursor()
-            conn.execute('DELETE FROM products WHERE productID = ' + productId)
-            conn.commit()
-            msg = "Deleted successsfully"
-        except:
-            conn.rollback()
-            msg = "Error occured"
-    conn.close()
-    print(msg)
-    return redirect(url_for('root'))
+    p = models.Product.query.get_or_404(productId)
+    try:
+        DB.session.delete(p)
+        DB.commit()
+    except Exception as e:
+        print(e)
+    return redirect(url_for('shop'))
+
+@SHOP.route("/search", methods=["GET", "POST"])
+def search():
+    p=[]
+    searchterm=""
+    if request.method == "POST":
+        searchterm = request.form['searchQuery']
+        st = searchterm
+        if '*' in st or '_' in st:
+            st = st.replace('_', '__') \
+                .replace('*', '%') \
+                .replace('?', '_')
+        st = "%"+st+"%"
+        p = models.Product.query.filter(models.Product.description.ilike(st)).all()
+
+    return render_template('shop/search.html',searchterm=searchterm,itemData=p)
 
 @SHOP.route("/displayCategory")
 def displayCategory():
@@ -255,7 +244,6 @@ def productDescription():
     #     conn.execute('SELECT productId, name, price, description, image, stock FROM products WHERE productId = ' + productId)
     #     productData = conn.fetchone()
     # conn.close()
-
     productData = models.Product.query.get_or_404(productId)
     return render_template("shop/productDescription.html", data=productData, loggedIn = loggedIn, firstName = firstName, noOfItems = noOfItems)
 

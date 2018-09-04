@@ -1,0 +1,26 @@
+
+{% extends 'shoplayout.html' %}
+
+{% block title %}Remove item{% endblock %}
+
+
+{% block content %}
+<table>
+		{% for row in data %}
+	<td>
+		<td>
+			<a href="/removeItem?productId={{row.object_id}}">Remove
+			</a>
+		</td>
+		<td>
+			{% if row.photo == None %}
+				img
+			{% else %}
+				<img src={{ url_for('static', filename='uploads/row.photo_id') }} id="itemImage" />
+			{% endif %}
+			{{row.name}}
+		</td>
+	</tr>
+		{% endfor %}
+</table>
+{% endblock %}
