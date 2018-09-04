@@ -7,15 +7,15 @@ import io
 import logging
 import flask_script as script
 # from flask.ext import script
-from eisitirio import app
-from eisitirio.database import db
-from eisitirio.database import models
+from flaskshop import app
+from flaskshop.database import db
+from flaskshop.database import models
 # from eisitirio.logic.custom_logic import ticket_logic
-from eisitirio.helpers import util
+from flaskshop.helpers import util
 from time import sleep
 import flask
 APP = flask.current_app#app.APP#DB = db.DB
-from eisitirio.app import eisitiriodb as DB
+from flaskshop.app import oussshopdb as DB
 LOG = logging.getLogger(__name__)
 
 

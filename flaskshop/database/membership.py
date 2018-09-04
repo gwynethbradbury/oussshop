@@ -15,6 +15,10 @@ from sqlalchemy.ext import hybrid
 import flask
 APP = flask.current_app#app.APP#DB = db.DB
 from flaskshop.app import oussshopdb as DB
+from flaskshop.helpers import util
+import pyqrcode
+import io
+
 
 class Membership(DB.Model):
     """Model for membership."""
@@ -73,8 +77,32 @@ class Membership(DB.Model):
         self.membership_type = membership_type
         self.price = price
 
-        self.expires = (datetime.datetime.utcnow() +
-                        APP.config['MEMBERSHIP_EXPIRY_TIME'])
+        y = datetime.datetime.utcnow().year
+        m = datetime.datetime.utcnow().month
+        if m>=10:
+            y = y+1
+
+        self.expires = datetime.datetime(y,10,1)#(datetime.datetime.utcnow()) +
+                        #APP.config['MEMBERSHIP_EXPIRY_TIME'])
+
+    def generate_barcode(self):
+        # generate barcode
+        key = util.generate_key(20).decode('utf-8')
+        self.barcode = key
+
+
+    def generate_qrcode(self):
+        # generate QR
+        qrcode_img = pyqrcode.create('{0}admin/membership/validate-ticket/{1}/{2}'.format(APP.config['EISITIRIO_URL'],
+                                                                                      self.object_id,
+                                                                                      self.barcode))
+        buffer = io.BytesIO()
+        qrcode_img.png(buffer, scale=20)
+
+        f = open('/Users/Gwyneth/Documents/repositories/oussshop/flaskshop/tmp.png', 'wb')
+        f.write(buffer)
+        f.close()
+        return buffer.getvalue()
 
 
     def __repr__(self):

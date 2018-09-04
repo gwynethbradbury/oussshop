@@ -183,7 +183,7 @@ TEMPLATE_CONFIG_KEYS.extend(FEATURE_CONSTANTS)
 START_TIME = datetime.datetime(2018, 5, 11, 20) # 8pm, 11th May 2018
 GATES_CLOSE = datetime.datetime(2018, 5, 12, 00,30) # 1am, 12th May 2018
 END_TIME = datetime.datetime(2018, 5, 12, 01,30) # 1am, 12th May 2018
-THEME = "Oxford's Biggest Salsa Event"
+THEME = "Oxford University Salsa Society"
 
 COLLEGE = "/".join(HOST_COLLEGES)
 BALL_NAME = 'Oxford Salsa Ball'
@@ -303,9 +303,11 @@ LOCKDOWN_MODE = timed_config.Until(False, LOCKDOWN_STARTS, True)
 # Template config
 
 TEMPLATE_CONFIG_KEYS = [
-
+    'THEME',
+    'EISITIRIO_URL',
 ]
 TEMPLATE_CONFIG_KEYS.extend(FEATURE_CONSTANTS)
+EISITIRIO_URL='0.0.0.0:5001/'
 
 
 
@@ -315,7 +317,6 @@ TEMPLATE_CONFIG_KEYS.extend(FEATURE_CONSTANTS)
 
 
 
-
-MEMBERSHIP_EXPIRY_TIME = datetime.timedelta(days=1)
+MEMBERSHIP_EXPIRY_TIME = datetime.timedelta(days=365)
 
 REQUIRE_USER_PHOTO = False

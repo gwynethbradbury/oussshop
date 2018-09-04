@@ -37,32 +37,43 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def getLoginDetails():
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        if 'email' not in session:
-            loggedIn = False
-            firstName = ''
-            noOfItems = 0
-        else:
-            loggedIn = True
-            conn.execute("SELECT userId, firstName FROM users WHERE email = '" + session['email'] + "'")
-            userId, firstName = conn.fetchone()
-            conn.execute("SELECT count(productId) FROM kart WHERE userId = " + str(userId))
-            noOfItems = conn.fetchone()[0]
-    conn.close()
-    return (loggedIn, firstName, noOfItems)
+    if login.current_user.is_authenticated:
+        count = models.Cart.query.filter_by(user_id=login.current_user.object_id).count()
+        return True, login.current_user.forenames,count
+    else:
+        return False, 'Guest',0
+    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+    #     #conn = conn.cursor()
+    #     if 'email' not in session:
+    #         loggedIn = False
+    #         firstName = ''
+    #         noOfItems = 0
+    #     else:
+    #         loggedIn = True
+    #         conn.execute("SELECT userId, firstName FROM users WHERE email = '" + session['email'] + "'")
+    #         userId, firstName = conn.fetchone()
+    #         conn.execute("SELECT count(productId) FROM kart WHERE userId = " + str(userId))
+    #         noOfItems = conn.fetchone()[0]
+    # conn.close()
+    # return (loggedIn, firstName, noOfItems)
 
-# @SHOP.route("/")
-# def root():
-#     loggedIn, firstName, noOfItems = getLoginDetails()
-#     with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-#         #conn = conn.cursor()
-#         conn.execute('SELECT productId, name, price, description, image, stock FROM products')
-#         itemData = conn.fetchall()
-#         conn.execute('SELECT categoryId, name FROM categories')
-#         categoryData = conn.fetchall()
-#     itemData = parse(itemData)
-#     return render_template('shop/home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
+@SHOP.route("/shop")
+def shop():
+    loggedIn, firstName, noOfItems = getLoginDetails()
+    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+    #     #conn = conn.cursor()
+    #     conn.execute('SELECT productId, name, price, description, image, stock FROM products')
+    #     itemData = conn.fetchall()
+    #     conn.execute('SELECT categoryId, name FROM categories')
+    #     categoryData = conn.fetchall()
+    # itemData = parse(itemData)
+
+    itemData = models.Product.query.all()
+    categoryData = models.Category.query.all()
+    return flask.render_template('shop/shop.html', itemData=itemData,
+                           loggedIn=loggedIn, firstName=firstName,
+                           noOfItems=noOfItems, categoryData=categoryData)
+
 
 @SHOP.route("/add")
 def admin():
@@ -130,88 +141,91 @@ def removeItem():
 def displayCategory():
         loggedIn, firstName, noOfItems = getLoginDetails()
         categoryId = request.args.get("categoryId")
-        with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-            #conn = conn.cursor()
-            conn.execute("SELECT products.productId, products.name, products.price, products.image, categories.name FROM products, categories WHERE products.categoryId = categories.categoryId AND categories.categoryId = " + categoryId)
-            data = conn.fetchall()
-        conn.close()
-        categoryName = data[0][4]
+        # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+        #     #conn = conn.cursor()
+        #     conn.execute("SELECT products.productId, products.name, products.price, products.image, categories.name FROM products, categories WHERE products.categoryId = categories.categoryId AND categories.categoryId = " + categoryId)
+        #     data = conn.fetchall()
+        # conn.close()
+
+        categoryName = models.Category.query.filter_by(name=categoryId).first().name
+        categoryId = models.Category.query.filter_by(name=categoryId).first().object_id
+        data = models.Product.query.filter_by(category_id=categoryId).all()
         data = parse(data)
         return render_template('shop/displayCategory.html', data=data, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryName=categoryName)
 
-@SHOP.route("/account/profile")
-def profileHome():
-    if 'email' not in session:
-        return redirect(url_for('root'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
-    return render_template("shop/profileHome.html", loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
-
-@SHOP.route("/account/profile/edit")
-def editProfile():
-    if 'email' not in session:
-        return redirect(url_for('root'))
-    loggedIn, firstName, noOfItems = getLoginDetails()
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        conn.execute("SELECT userId, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone FROM users WHERE email = '" + session['email'] + "'")
-        profileData = conn.fetchone()
-    conn.close()
-    return render_template("shop/editProfile.html", profileData=profileData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
-
-@SHOP.route("/account/profile/changePassword", methods=["GET", "POST"])
-def changePassword():
-    if 'email' not in session:
-        return redirect(url_for('loginForm'))
-    if request.method == "POST":
-        oldPassword = request.form['oldpassword']
-        oldPassword = hashlib.md5(oldPassword.encode()).hexdigest()
-        newPassword = request.form['newpassword']
-        newPassword = hashlib.md5(newPassword.encode()).hexdigest()
-        with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-            #conn = conn.cursor()
-            conn.execute("SELECT userId, password FROM users WHERE email = '" + session['email'] + "'")
-            userId, password = conn.fetchone()
-            if (password == oldPassword):
-                try:
-                    conn.execute("UPDATE users SET password = ? WHERE userId = ?", (newPassword, userId))
-                    conn.commit()
-                    msg="Changed successfully"
-                except:
-                    conn.rollback()
-                    msg = "Failed"
-                return render_template("changePassword.html", msg=msg)
-            else:
-                msg = "Wrong password"
-        conn.close()
-        return render_template("shop/changePassword.html", msg=msg)
-    else:
-        return render_template("shop/changePassword.html")
-
-@SHOP.route("/updateProfile", methods=["GET", "POST"])
-def updateProfile():
-    if request.method == 'POST':
-        email = request.form['email']
-        firstName = request.form['firstName']
-        lastName = request.form['lastName']
-        address1 = request.form['address1']
-        address2 = request.form['address2']
-        zipcode = request.form['zipcode']
-        city = request.form['city']
-        state = request.form['state']
-        country = request.form['country']
-        phone = request.form['phone']
-        with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as con:
-                try:
-                    conn = con.cursor()
-                    conn.execute('UPDATE users SET firstName = ?, lastName = ?, address1 = ?, address2 = ?, zipcode = ?, city = ?, state = ?, country = ?, phone = ? WHERE email = ?', (firstName, lastName, address1, address2, zipcode, city, state, country, phone, email))
-
-                    con.commit()
-                    msg = "Saved Successfully"
-                except:
-                    #con.rollback()
-                    msg = "Error occured"
-        con.close()
-        return redirect(url_for('editProfile'))
+# @SHOP.route("/account/profile")
+# def profileHome():
+#     if 'email' not in session:
+#         return redirect(url_for('root'))
+#     loggedIn, firstName, noOfItems = getLoginDetails()
+#     return render_template("shop/profileHome.html", loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
+#
+# @SHOP.route("/account/profile/edit")
+# def editProfile():
+#     if 'email' not in session:
+#         return redirect(url_for('root'))
+#     loggedIn, firstName, noOfItems = getLoginDetails()
+#     with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+#         #conn = conn.cursor()
+#         conn.execute("SELECT userId, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone FROM users WHERE email = '" + session['email'] + "'")
+#         profileData = conn.fetchone()
+#     conn.close()
+#     return render_template("shop/editProfile.html", profileData=profileData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
+#
+# @SHOP.route("/account/profile/changePassword", methods=["GET", "POST"])
+# def changePassword():
+#     if 'email' not in session:
+#         return redirect(url_for('loginForm'))
+#     if request.method == "POST":
+#         oldPassword = request.form['oldpassword']
+#         oldPassword = hashlib.md5(oldPassword.encode()).hexdigest()
+#         newPassword = request.form['newpassword']
+#         newPassword = hashlib.md5(newPassword.encode()).hexdigest()
+#         with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+#             #conn = conn.cursor()
+#             conn.execute("SELECT userId, password FROM users WHERE email = '" + session['email'] + "'")
+#             userId, password = conn.fetchone()
+#             if (password == oldPassword):
+#                 try:
+#                     conn.execute("UPDATE users SET password = ? WHERE userId = ?", (newPassword, userId))
+#                     conn.commit()
+#                     msg="Changed successfully"
+#                 except:
+#                     conn.rollback()
+#                     msg = "Failed"
+#                 return render_template("changePassword.html", msg=msg)
+#             else:
+#                 msg = "Wrong password"
+#         conn.close()
+#         return render_template("shop/changePassword.html", msg=msg)
+#     else:
+#         return render_template("shop/changePassword.html")
+#
+# @SHOP.route("/updateProfile", methods=["GET", "POST"])
+# def updateProfile():
+#     if request.method == 'POST':
+#         email = request.form['email']
+#         firstName = request.form['firstName']
+#         lastName = request.form['lastName']
+#         address1 = request.form['address1']
+#         address2 = request.form['address2']
+#         zipcode = request.form['zipcode']
+#         city = request.form['city']
+#         state = request.form['state']
+#         country = request.form['country']
+#         phone = request.form['phone']
+#         with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as con:
+#                 try:
+#                     conn = con.cursor()
+#                     conn.execute('UPDATE users SET firstName = ?, lastName = ?, address1 = ?, address2 = ?, zipcode = ?, city = ?, state = ?, country = ?, phone = ? WHERE email = ?', (firstName, lastName, address1, address2, zipcode, city, state, country, phone, email))
+#
+#                     con.commit()
+#                     msg = "Saved Successfully"
+#                 except:
+#                     #con.rollback()
+#                     msg = "Error occured"
+#         con.close()
+#         return redirect(url_for('editProfile'))
 
 # @SHOP.route("/loginForm")
 # def loginForm():
@@ -236,85 +250,102 @@ def updateProfile():
 def productDescription():
     loggedIn, firstName, noOfItems = getLoginDetails()
     productId = request.args.get('productId')
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        conn.execute('SELECT productId, name, price, description, image, stock FROM products WHERE productId = ' + productId)
-        productData = conn.fetchone()
-    conn.close()
+    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+    #     #conn = conn.cursor()
+    #     conn.execute('SELECT productId, name, price, description, image, stock FROM products WHERE productId = ' + productId)
+    #     productData = conn.fetchone()
+    # conn.close()
+
+    productData = models.Product.query.get_or_404(productId)
     return render_template("shop/productDescription.html", data=productData, loggedIn = loggedIn, firstName = firstName, noOfItems = noOfItems)
 
 @SHOP.route("/addToCart")
 def addToCart():
-    if 'email' not in session:
-        return redirect(url_for('loginForm'))
+    if not login.current_user.is_authenticated:#'email' not in session:
+        return redirect(url_for('shop.home'))
     else:
         productId = int(request.args.get('productId'))
-        with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+        # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
             #conn = conn.cursor()
-            conn.execute("SELECT userId FROM users WHERE email = '" + session['email'] + "'")
-            userId = conn.fetchone()[0]
-            try:
-                conn.execute("INSERT INTO kart (userId, productId) VALUES (?, ?)", (userId, productId))
-                conn.commit()
-                msg = "Added successfully"
-            except:
-                conn.rollback()
-                msg = "Error occured"
-        conn.close()
-        return redirect(url_for('root'))
+            # conn.execute("SELECT userId FROM users WHERE email = '" + session['email'] + "'")
+        userId = login.current_user.object_id# conn.fetchone()[0]
+        try:
+            # conn.execute("INSERT INTO kart (userId, productId) VALUES (?, ?)", (userId, productId))
+            # conn.commit()
+            c = models.Cart(userId,
+                            productId)
+            DB.session.add(c)
+            DB.session.commit()
+            msg = "Added successfully"
+        except Exception as e:
+            print(e)
+            # conn.rollback()
+            msg = "Error occured"
+        # conn.close()
+
+
+        return redirect(url_for('shop.cart'))
 
 @SHOP.route("/cart")
 def cart():
-    if 'email' not in session:
-        return redirect(url_for('loginForm'))
+    if not login.current_user.is_authenticated:#'email' not in session:
+        return redirect(url_for('shop'))
     loggedIn, firstName, noOfItems = getLoginDetails()
-    email = session['email']
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
-        #conn = conn.cursor()
-        conn.execute("SELECT userId FROM users WHERE email = '" + email + "'")
-        userId = conn.fetchone()[0]
-        conn.execute("SELECT products.productId, products.name, products.price, products.image FROM products, kart WHERE products.productId = kart.productId AND kart.userId = " + str(userId))
-        products = conn.fetchall()
+    # email = login.current_user.email#session['email']
+    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+    #     #conn = conn.cursor()
+    #     conn.execute("SELECT userId FROM users WHERE email = '" + email + "'")
+    #     userId = conn.fetchone()[0]
+    #     conn.execute("SELECT products.productId, products.name, products.price, products.image FROM products, kart WHERE products.productId = kart.productId AND kart.userId = " + str(userId))
+    #     products = conn.fetchall()
+    items = models.Cart.query.filter_by(user_id=login.current_user.object_id).all()
+    products=[]
+    for i in items:
+        products.append(models.Product.query.get_or_404(i.product_id))
     totalPrice = 0
-    for row in products:
-        totalPrice += row[2]
+    for p in products:
+        totalPrice += p.price
     return render_template("shop/cart.html", products = products, totalPrice=totalPrice, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
 
 @SHOP.route("/removeFromCart")
 def removeFromCart():
-    if 'email' not in session:
-        return redirect(url_for('loginForm'))
-    email = session['email']
+    if not login.current_user.is_authenticated:#'email' not in session:
+        return redirect(url_for('home'))
+    # email = session['email']
     productId = int(request.args.get('productId'))
-    with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
+    # with pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop') as conn:
         #conn = conn.cursor()
-        conn.execute("SELECT userId FROM users WHERE email = '" + email + "'")
-        userId = conn.fetchone()[0]
-        try:
-            conn.execute("DELETE FROM kart WHERE userId = " + str(userId) + " AND productId = " + str(productId))
-            conn.commit()
-            msg = "removed successfully"
-        except:
-            conn.rollback()
-            msg = "error occured"
-    conn.close()
-    return redirect(url_for('root'))
+        # conn.execute("SELECT userId FROM users WHERE email = '" + email + "'")
+    userId = login.current_user.object_id#conn.fetchone()[0]
+    try:
+        # conn.execute("DELETE FROM kart WHERE userId = " + str(userId) + " AND productId = " + str(productId))
+        # conn.commit()
+        c = models.Cart.query.filter_by(user_id=userId,product_id=productId).first()
+        DB.session.delete(c)
+        DB.session.commit()
+        msg = "removed successfully"
+    except Exception as e:
+        print(e)
+        # conn.rollback()
+        msg = "error occured"
+    # conn.close()
+    return redirect(url_for('shop.cart'))
 
 # @SHOP.route("/logout")
 # def logout():
 #     session.pop('email', None)
 #     return redirect(url_for('root'))
-
-def is_valid(email, password):
-    con = pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop')
-    conn = con.cursor()
-    conn.execute('SELECT email, password FROM users')
-    data = conn.fetchall()
-    for row in data:
-        if row[0] == email and row[1] == hashlib.md5(password.encode()).hexdigest():
-            return True
-    return False
-
+#
+# def is_valid(email, password):
+#     con = pymysql.connect(user='root',passwd='GTG24DDa',host='localhost',db='flaskshop')
+#     conn = con.cursor()
+#     conn.execute('SELECT email, password FROM users')
+#     data = conn.fetchall()
+#     for row in data:
+#         if row[0] == email and row[1] == hashlib.md5(password.encode()).hexdigest():
+#             return True
+#     return False
+#
 # @SHOP.route("/register", methods = ['GET', 'POST'])
 # def register():
 #     if request.method == 'POST':
@@ -545,17 +576,17 @@ def register():
     ):
         flashes.append('Phone cannot be blank')
 
-    # if (
-    #         'college' not in flask.request.form or
-    #         flask.request.form['college'] == '---'
-    # ):
-    #     flashes.append('Please select a college')
-    #
-    # if (
-    #         'affiliation' not in flask.request.form or
-    #         flask.request.form['affiliation'] == '---'
-    # ):
-    #     flashes.append('Please select an affiliation')
+    if (
+            'college' not in flask.request.form or
+            flask.request.form['college'] == '---'
+    ):
+        flashes.append('Please select a college')
+
+    if (
+            'affiliation' not in flask.request.form or
+            flask.request.form['affiliation'] == '---'
+    ):
+        flashes.append('Please select an affiliation')
 
     if APP.config['REQUIRE_USER_PHOTO'] and (
             'photo' not in flask.request.files or
@@ -645,386 +676,386 @@ def register():
 
     return flask.redirect(flask.url_for('shop.home'))
 
-# @SHOP.route('/confirmemail/<int:user_id>/<secret_key>')
-# def confirm_email(user_id, secret_key):
-#     """Confirm the user's email address.
-#
-#     The user is sent a link to this view in an email. Visiting this view
-#     confirms the validity of their email address.
-#     """
-#     user = models.User.query.get_or_404(user_id)
-#
-#     if user is not None and user.secret_key == secret_key:
-#         user.secret_key = None
-#         user.verified = True
-#
-#         # This view is used to verify the email address if an already registered
-#         # user decides to change their registered email.
-#         if user.new_email is not None:
-#             user.email = user.new_email
-#             user.new_email = None
-#
-#         DB.session.commit()
-#
-#         APP.log_manager.log_event(
-#             'Confirmed email',
-#             user=user
-#         )
-#
-#         if login.current_user.is_anonymous:
-#             flask.flash(
-#                 'Your email address has been verified. You can now log in',
-#                 'info'
-#             )
-#         else:
-#             flask.flash('Your email address has been verified.', 'info')
-#     else: ## XXX/FIXME
-#         APP.log_manager.log_event(
-#              'User is not none, or secret key is bad'
-#         )
-#     #    flask.flash(
-#     #        (
-#     #            'Could not confirm email address. Check that you have used '
-#     #            'the correct link'
-#     #        ),
-#     #        'warning'
-#     #    )
-#
-#     return flask.redirect(flask.url_for('router'))
-#
-# @SHOP.route('/emailconfirm', methods=['GET', 'POST'])
-# def email_confirm():
-#     """Retry email confirmation.
-#
-#     If the user somehow manages to lose the email confirmation message, they can
-#     use this view to have it resent.
-#     """
-#     if flask.request.method == 'POST':
-#         user = models.User.get_by_email(flask.request.form['email'])
-#
-#         if not user:
-#             APP.log_manager.log_event(
-#                 'Attempted email confirm for {0}'.format(
-#                     flask.request.form['email']
-#                 )
-#             )
-#
-#             APP.email_manager.send_template(
-#                 flask.request.form['email'],
-#                 'Attempted Account Access',
-#                 'email_confirm_fail.email'
-#             )
-#         else:
-#             user.secret_key = util.generate_key(64)
-#             user.secret_key_expiry = None
-#
-#             DB.session.commit()
-#
-#             APP.log_manager.log_event(
-#                 'Requested email confirm',
-#                 user=user
-#             )
-#
-#             APP.email_manager.send_template(
-#                 flask.request.form['email'],
-#                 'Confirm your Email Address',
-#                 'email_confirm.email',
-#                 name=user.forenames,
-#                 confirmurl=flask.url_for(
-#                     'shop.confirm_email',
-#                     user_id=user.object_id,
-#                     secret_key=user.secret_key,
-#                     _external=True
-#                 ),
-#                 destroyurl=flask.url_for(
-#                     'shop.destroy_account',
-#                     user_id=user.object_id,
-#                     secret_key=user.secret_key,
-#                     _external=True
-#                 )
-#             )
-#
-#         flask.flash(
-#             (
-#                 'An email has been sent to {0} with detailing what to do '
-#                 'next. Please check your email (including your spam folder) '
-#                 'and follow the instructions given'
-#             ).format(
-#                 flask.request.form['email']
-#             ),
-#             'info'
-#         )
-#
-#         return flask.redirect(flask.url_for('shop.home'))
-#     else:
-#         return flask.render_template('front/email_confirm.html')
-#
+@SHOP.route('/confirmemail/<int:user_id>/<secret_key>')
+def confirm_email(user_id, secret_key):
+    """Confirm the user's email address.
+
+    The user is sent a link to this view in an email. Visiting this view
+    confirms the validity of their email address.
+    """
+    user = models.User.query.get_or_404(user_id)
+
+    if user is not None and user.secret_key == secret_key:
+        user.secret_key = None
+        user.verified = True
+
+        # This view is used to verify the email address if an already registered
+        # user decides to change their registered email.
+        if user.new_email is not None:
+            user.email = user.new_email
+            user.new_email = None
+
+        DB.session.commit()
+
+        APP.log_manager.log_event(
+            'Confirmed email',
+            user=user
+        )
+
+        if login.current_user.is_anonymous:
+            flask.flash(
+                'Your email address has been verified. You can now log in',
+                'info'
+            )
+        else:
+            flask.flash('Your email address has been verified.', 'info')
+    else: ## XXX/FIXME
+        APP.log_manager.log_event(
+             'User is not none, or secret key is bad'
+        )
+    #    flask.flash(
+    #        (
+    #            'Could not confirm email address. Check that you have used '
+    #            'the correct link'
+    #        ),
+    #        'warning'
+    #    )
+
+    return flask.redirect(flask.url_for('router'))
+
+@SHOP.route('/emailconfirm', methods=['GET', 'POST'])
+def email_confirm():
+    """Retry email confirmation.
+
+    If the user somehow manages to lose the email confirmation message, they can
+    use this view to have it resent.
+    """
+    if flask.request.method == 'POST':
+        user = models.User.get_by_email(flask.request.form['email'])
+
+        if not user:
+            APP.log_manager.log_event(
+                'Attempted email confirm for {0}'.format(
+                    flask.request.form['email']
+                )
+            )
+
+            APP.email_manager.send_template(
+                flask.request.form['email'],
+                'Attempted Account Access',
+                'email_confirm_fail.email'
+            )
+        else:
+            user.secret_key = util.generate_key(64)
+            user.secret_key_expiry = None
+
+            DB.session.commit()
+
+            APP.log_manager.log_event(
+                'Requested email confirm',
+                user=user
+            )
+
+            APP.email_manager.send_template(
+                flask.request.form['email'],
+                'Confirm your Email Address',
+                'email_confirm.email',
+                name=user.forenames,
+                confirmurl=flask.url_for(
+                    'shop.confirm_email',
+                    user_id=user.object_id,
+                    secret_key=user.secret_key,
+                    _external=True
+                ),
+                destroyurl=flask.url_for(
+                    'shop.destroy_account',
+                    user_id=user.object_id,
+                    secret_key=user.secret_key,
+                    _external=True
+                )
+            )
+
+        flask.flash(
+            (
+                'An email has been sent to {0} with detailing what to do '
+                'next. Please check your email (including your spam folder) '
+                'and follow the instructions given'
+            ).format(
+                flask.request.form['email']
+            ),
+            'info'
+        )
+
+        return flask.redirect(flask.url_for('shop.home'))
+    else:
+        return flask.render_template('front/email_confirm.html')
+
 @SHOP.route('/terms')
 def terms():
     """Display the terms and conditions."""
     return flask.render_template('shop/terms.html')
 
-# @SHOP.route('/faqs')
-# def faqs():
-#     """Display the frequently asked questions."""
-#     return flask.render_template('front/faqs.html')
-#
-# @SHOP.route('/passwordreset', methods=['GET', 'POST'])
-# def password_reset():
-#     """Display a form to start the password reset process.
-#
-#     User enters their email, and is sent an email containing a link with a
-#     random key to validate their identity.
-#     """
-#     if flask.request.method == 'POST':
-#         user = models.User.get_by_email(flask.request.form['email'])
-#
-#         if not user:
-#             APP.log_manager.log_event(
-#                 'Attempted password reset for {0}'.format(
-#                     flask.request.form['email']
-#                 )
-#             )
-#
-#             APP.email_manager.send_template(
-#                 flask.request.form['email'],
-#                 'Attempted Account Access',
-#                 'password_reset_fail.email'
-#             )
-#         else:
-#             user.secret_key = util.generate_key(64)
-#             user.secret_key_expiry = (
-#                 datetime.datetime.utcnow() +
-#                 datetime.timedelta(minutes=30)
-#             )
-#
-#             DB.session.commit()
-#
-#             APP.log_manager.log_event(
-#                 'Started password reset',
-#                 user=user
-#             )
-#
-#             APP.email_manager.send_template(
-#                 flask.request.form['email'],
-#                 'Confirm Password Reset',
-#                 'password_reset_confirm.email',
-#                 name=user.forenames,
-#                 confirmurl=flask.url_for(
-#                     'shop.reset_password',
-#                     user_id=user.object_id,
-#                     secret_key=user.secret_key,
-#                     _external=True
-#                 )
-#             )
-#
-#         flask.flash(
-#             (
-#                 'An email has been sent to {0} with detailing what to do '
-#                 'next. Please check your email (including your spam folder) '
-#                 'and follow the instructions given'
-#             ).format(
-#                 flask.request.form['email']
-#             ),
-#             'info'
-#         )
-#
-#         return flask.redirect(flask.url_for('shop.home'))
-#     else:
-#         return flask.render_template('front/password_reset.html')
-# def member_password_create(user):
-#     """
-#     as above, but jsut sends the reset password email
-#     """
-#
-#     if not user:
-#         APP.log_manager.log_event(
-#             'Attempted password reset for {0}'.format(
-#                 flask.request.form['email']
-#             )
-#         )
-#
-#         APP.email_manager.send_template(
-#             flask.request.form['email'],
-#             'Attempted Account Access',
-#             'password_reset_fail.email'
-#         )
-#     else:
-#         user.secret_key = util.generate_key(64)
-#         user.secret_key_expiry = (
-#             datetime.datetime.utcnow() +
-#             datetime.timedelta(minutes=4320)
-#         )#expires in 3 days
-#
-#         DB.session.add(user)
-#         DB.session.commit()
-#
-#         # APP.log_manager.log_event(
-#         #     'Started password creation',
-#         #     user=user
-#         # )
-#
-#         APP.email_manager.send_template(
-#             user.email,
-#             'Confirm Password Reset',
-#             'create_user_password.email',
-#             name=user.forenames,
-#             confirmurl="{}resetpassword/{}/{}".format(app.APP.config['FLASKSHOP_URL'],user.object_id,user.secret_key)
-#         )
-#
-#
-#     return True
-#
-# @SHOP.route('/resetpassword/<int:user_id>/<secret_key>',
-#              methods=['GET', 'POST'])
-# def reset_password(user_id, secret_key):
-#     """Complete the password reset process.
-#
-#     To reset their password, the user is sent an email with a link to this view.
-#     Upon clicking it, they are presented with a form to define a new password,
-#     which is saved when the form is submitted (to this view)
-#     """
-#     user = models.User.query.get_or_404(user_id)
-#
-#     if user is None or user.secret_key != secret_key:
-#         if user is not None:
-#             user.secret_key = None
-#             user.secret_key_expiry = None
-#
-#             DB.session.commit()
-#
-#         flask.flash('Could not complete password reset. Please try again',
-#                     'error')
-#
-#         return flask.redirect(flask.url_for('shop.home'))
-#
-#     if flask.request.method == 'POST':
-#         if flask.request.form['password'] != flask.request.form['confirm']:
-#             user.secret_key = util.generate_key(64)
-#             user.secret_key_expiry = (datetime.datetime.utcnow() +
-#                                       datetime.timedelta(minutes=5))
-#
-#             DB.session.commit()
-#
-#             flask.flash('Passwords do not match, please try again', 'warning')
-#
-#             return flask.redirect(
-#                 flask.url_for(
-#                     'shop.reset_password',
-#                     user_id=user.object_id,
-#                     secret_key=user.secret_key
-#                 )
-#             )
-#         else:
-#             user.set_password(flask.request.form['password'])
-#
-#             user.secret_key = None
-#             user.secret_key_expiry = None
-#
-#             DB.session.commit()
-#
-#             APP.log_manager.log_event(
-#                 'Completed password reset',
-#                 user=user
-#             )
-#
-#             flask.flash('Your password has been reset, please log in.',
-#                         'success')
-#
-#             return flask.redirect(flask.url_for('shop.home'))
-#     else:
-#         return flask.render_template(
-#             'front/reset_password.html',
-#             user_id=user_id,
-#             secret_key=secret_key
-#         )
-#
-# @SHOP.route('/destroyaccount/<int:user_id>/<secret_key>')
-# def destroy_account(user_id, secret_key):
-#     """Destroy an unverified account.
-#
-#     If a user is unverified (and therefore has never been able to log in), we
-#     allow their account to be destroyed. This is useful if somebody tries to
-#     register with an email address that isn't theirs, where the actual owner of
-#     the email address can trigger the account's distruction.
-#
-#     If a user is verified, it gets a little too complicated to destroy their
-#     account (what happens to any tickets they own?)
-#     """
-#     user = models.User.query.get_or_404(user_id)
-#
-#     if user is not None and user.secret_key == secret_key:
-#         if not user.is_verified:
-#             for entry in user.events:
-#                 entry.action = (
-#                     entry.action +
-#                     ' (destroyed user with email address {0})'.format(
-#                         user.email
-#                     )
-#                 )
-#                 entry.user = None
-#
-#             DB.session.delete(user)
-#             DB.session.delete(user.photo)
-#             DB.session.commit()
-#
-#             photos.delete_photo(user.photo)
-#
-#             APP.log_manager.log_event(
-#                 'Deleted account with email address {0}'.format(
-#                     user.email
-#                 )
-#             )
-#
-#             flask.flash('The account has been deleted.', 'info')
-#         else:
-#             APP.log_manager.log_event(
-#                 'Attempted deletion of verified account',
-#                 user=user
-#             )
-#
-#             flask.flash('Could not delete user account.', 'warning')
-#     else:
-#         flask.flash(
-#             (
-#                 'Could not delete user account. Check that you have used the '
-#                 'correct link'
-#             ),
-#             'warning'
-#         )
-#
-#     return flask.redirect(flask.url_for('shop.home'))
-#
-# @SHOP.route('/logout')
-# @login.login_required
-# def logout():
-#     """Log out the currently logged in user.
-#
-#     The system allows admins to impersonate other users; this view checks if the
-#     currently logged in user is being impersonated, and if so logs back in as
-#     the admin who is impersonating them.
-#     """
-#     if 'actor_id' in flask.session:
-#         APP.log_manager.log_event(
-#             'Finished impersonating user',
-#             user=login.current_user
-#         )
-#
-#         actor = models.User.query.get_or_404(flask.session['actor_id'])
-#
-#         flask.session.pop('actor_id', None)
-#
-#         if actor:
-#             login.login_user(
-#                 actor
-#             )
-#
-#             return flask.redirect(flask.url_for('admin.admin_home'))
-#
-#     APP.log_manager.log_event(
-#         'Logged Out',
-#         user=login.current_user
-#     )
-#
-#     login.logout_user()
-#     return flask.redirect(flask.url_for('shop.home'))
+@SHOP.route('/faqs')
+def faqs():
+    """Display the frequently asked questions."""
+    return flask.render_template('front/faqs.html')
+
+@SHOP.route('/passwordreset', methods=['GET', 'POST'])
+def password_reset():
+    """Display a form to start the password reset process.
+
+    User enters their email, and is sent an email containing a link with a
+    random key to validate their identity.
+    """
+    if flask.request.method == 'POST':
+        user = models.User.get_by_email(flask.request.form['email'])
+
+        if not user:
+            APP.log_manager.log_event(
+                'Attempted password reset for {0}'.format(
+                    flask.request.form['email']
+                )
+            )
+
+            APP.email_manager.send_template(
+                flask.request.form['email'],
+                'Attempted Account Access',
+                'password_reset_fail.email'
+            )
+        else:
+            user.secret_key = util.generate_key(64)
+            user.secret_key_expiry = (
+                datetime.datetime.utcnow() +
+                datetime.timedelta(minutes=30)
+            )
+
+            DB.session.commit()
+
+            APP.log_manager.log_event(
+                'Started password reset',
+                user=user
+            )
+
+            APP.email_manager.send_template(
+                flask.request.form['email'],
+                'Confirm Password Reset',
+                'password_reset_confirm.email',
+                name=user.forenames,
+                confirmurl=flask.url_for(
+                    'shop.reset_password',
+                    user_id=user.object_id,
+                    secret_key=user.secret_key,
+                    _external=True
+                )
+            )
+
+        flask.flash(
+            (
+                'An email has been sent to {0} with detailing what to do '
+                'next. Please check your email (including your spam folder) '
+                'and follow the instructions given'
+            ).format(
+                flask.request.form['email']
+            ),
+            'info'
+        )
+
+        return flask.redirect(flask.url_for('shop.home'))
+    else:
+        return flask.render_template('front/password_reset.html')
+def member_password_create(user):
+    """
+    as above, but jsut sends the reset password email
+    """
+
+    if not user:
+        APP.log_manager.log_event(
+            'Attempted password reset for {0}'.format(
+                flask.request.form['email']
+            )
+        )
+
+        APP.email_manager.send_template(
+            flask.request.form['email'],
+            'Attempted Account Access',
+            'password_reset_fail.email'
+        )
+    else:
+        user.secret_key = util.generate_key(64)
+        user.secret_key_expiry = (
+            datetime.datetime.utcnow() +
+            datetime.timedelta(minutes=4320)
+        )#expires in 3 days
+
+        DB.session.add(user)
+        DB.session.commit()
+
+        # APP.log_manager.log_event(
+        #     'Started password creation',
+        #     user=user
+        # )
+
+        APP.email_manager.send_template(
+            user.email,
+            'Confirm Password Reset',
+            'create_user_password.email',
+            name=user.forenames,
+            confirmurl="{}resetpassword/{}/{}".format(app.APP.config['FLASKSHOP_URL'],user.object_id,user.secret_key)
+        )
+
+
+    return True
+
+@SHOP.route('/resetpassword/<int:user_id>/<secret_key>',
+             methods=['GET', 'POST'])
+def reset_password(user_id, secret_key):
+    """Complete the password reset process.
+
+    To reset their password, the user is sent an email with a link to this view.
+    Upon clicking it, they are presented with a form to define a new password,
+    which is saved when the form is submitted (to this view)
+    """
+    user = models.User.query.get_or_404(user_id)
+
+    if user is None or user.secret_key != secret_key:
+        if user is not None:
+            user.secret_key = None
+            user.secret_key_expiry = None
+
+            DB.session.commit()
+
+        flask.flash('Could not complete password reset. Please try again',
+                    'error')
+
+        return flask.redirect(flask.url_for('shop.home'))
+
+    if flask.request.method == 'POST':
+        if flask.request.form['password'] != flask.request.form['confirm']:
+            user.secret_key = util.generate_key(64)
+            user.secret_key_expiry = (datetime.datetime.utcnow() +
+                                      datetime.timedelta(minutes=5))
+
+            DB.session.commit()
+
+            flask.flash('Passwords do not match, please try again', 'warning')
+
+            return flask.redirect(
+                flask.url_for(
+                    'shop.reset_password',
+                    user_id=user.object_id,
+                    secret_key=user.secret_key
+                )
+            )
+        else:
+            user.set_password(flask.request.form['password'])
+
+            user.secret_key = None
+            user.secret_key_expiry = None
+
+            DB.session.commit()
+
+            APP.log_manager.log_event(
+                'Completed password reset',
+                user=user
+            )
+
+            flask.flash('Your password has been reset, please log in.',
+                        'success')
+
+            return flask.redirect(flask.url_for('shop.home'))
+    else:
+        return flask.render_template(
+            'front/reset_password.html',
+            user_id=user_id,
+            secret_key=secret_key
+        )
+
+@SHOP.route('/destroyaccount/<int:user_id>/<secret_key>')
+def destroy_account(user_id, secret_key):
+    """Destroy an unverified account.
+
+    If a user is unverified (and therefore has never been able to log in), we
+    allow their account to be destroyed. This is useful if somebody tries to
+    register with an email address that isn't theirs, where the actual owner of
+    the email address can trigger the account's distruction.
+
+    If a user is verified, it gets a little too complicated to destroy their
+    account (what happens to any tickets they own?)
+    """
+    user = models.User.query.get_or_404(user_id)
+
+    if user is not None and user.secret_key == secret_key:
+        if not user.is_verified:
+            for entry in user.events:
+                entry.action = (
+                    entry.action +
+                    ' (destroyed user with email address {0})'.format(
+                        user.email
+                    )
+                )
+                entry.user = None
+
+            DB.session.delete(user)
+            DB.session.delete(user.photo)
+            DB.session.commit()
+
+            photos.delete_photo(user.photo)
+
+            APP.log_manager.log_event(
+                'Deleted account with email address {0}'.format(
+                    user.email
+                )
+            )
+
+            flask.flash('The account has been deleted.', 'info')
+        else:
+            APP.log_manager.log_event(
+                'Attempted deletion of verified account',
+                user=user
+            )
+
+            flask.flash('Could not delete user account.', 'warning')
+    else:
+        flask.flash(
+            (
+                'Could not delete user account. Check that you have used the '
+                'correct link'
+            ),
+            'warning'
+        )
+
+    return flask.redirect(flask.url_for('shop.home'))
+
+@SHOP.route('/logout')
+@login.login_required
+def logout():
+    """Log out the currently logged in user.
+
+    The system allows admins to impersonate other users; this view checks if the
+    currently logged in user is being impersonated, and if so logs back in as
+    the admin who is impersonating them.
+    """
+    if 'actor_id' in flask.session:
+        APP.log_manager.log_event(
+            'Finished impersonating user',
+            user=login.current_user
+        )
+
+        actor = models.User.query.get_or_404(flask.session['actor_id'])
+
+        flask.session.pop('actor_id', None)
+
+        if actor:
+            login.login_user(
+                actor
+            )
+
+            return flask.redirect(flask.url_for('admin.admin_home'))
+
+    APP.log_manager.log_event(
+        'Logged Out',
+        user=login.current_user
+    )
+
+    login.logout_user()
+    return flask.redirect(flask.url_for('shop.home'))

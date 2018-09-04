@@ -1,0 +1,10 @@
+ENABLE_ROUNDUP_DONATION = False
+REALEX_MERCHANT_ID='ouss'
+REALEX_SECRET='xZq1xMsheb'
+REALEX_ENDPOINT_URL="https://hpp.realexpayments.com/pay"
+REALEX_RESPONSE_URL="http://www.oxfordsalsaball.co.uk/purchase/payment-processed"
+PAYPAL_MERCHANT_ID='ouss'
+PAYPAL_SECRET='xZq1xMsheb'
+PAYPAL_ENDPOINT_URL="https://hpp.realexpayments.com/pay"
+PAYPAL_RESPONSE_URL="http://www.oxfordsalsaball.co.uk/purchase/paypal-processed"
+PAYPAL_SURCHARGE = 95#p

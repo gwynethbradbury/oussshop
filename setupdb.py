@@ -35,16 +35,52 @@ from flaskshop.database.user import User
 # from flaskshop.database.voucher import Voucher
 # from flaskshop.database.waiting import Waiting
 # from flaskshop.database.roundup_donation import RoundupDonation
+from flaskshop.database.products import Product
+from flaskshop.database.category import Category
+from flaskshop.database.cart import Cart
 
+db.drop_all()
 db.create_all()
+
+
+
+
 import flaskshop.database.college as college
 for c in college.get_static():
     db.session.add(c)
+
 import flaskshop.database.affiliation as affiliation
 for a in affiliation.get_static():
     db.session.add(a)
 
+import flaskshop.database.category as category
+for cat in category.get_static():
+    db.session.add(cat)
 db.session.commit()
+
+category_id = Category.query.all()[0].object_id
+import flaskshop.database.products as product
+for p in product.get_static(category_id):
+    db.session.add(p)
+
+db.session.commit()
+
+u=User('admin@admin','admin','admin','admin','0',
+       College.query.all()[0],
+       Affiliation.query.all()[0],None)
+u.verified=True
+
+db.session.add(u)
+db.session.commit()
+
+m = Membership(u,1,30)
+db.session.add(m)
+db.session.commit()
+m.generate_barcode()
+
+db.session.add(m)
+db.session.commit()
+
 
 
 

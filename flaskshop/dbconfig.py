@@ -1,6 +1,6 @@
 debugowner=''
 
-dbpwd = 'GTG24DDa'
+dbpwd = ''
 dbhost = 'localhost'
 dbuser='root'
 dbname='oussshop'

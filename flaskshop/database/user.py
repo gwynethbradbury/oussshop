@@ -44,7 +44,7 @@ class User(DB.Model):
         nullable=True
     )
     password_hash = DB.Column(
-        DB.BINARY(100),
+        DB.BINARY(60),
         nullable=False
     )
     forenames = DB.Column(
@@ -162,6 +162,11 @@ class User(DB.Model):
             return True
         return False
 
+    def memberships(self):
+        if self.has_membership():
+            return membership.Membership.query.filter_by(owner_id=self.object_id).all()
+        return None
+
     def has_unpaid_memberships(self):
         if membership.Membership.query.filter_by(owner_id=self.object_id,paid=0).count()>0:
             return True
@@ -176,10 +181,10 @@ class User(DB.Model):
         return False
 
 #todo: check logic
-    def has_collected_memberships(self):
-        return False
-    def has_uncollected_memberships(self):
-        return False
+    # def has_collected_memberships(self):
+    #     return False
+    # def has_uncollected_memberships(self):
+    #     return False
 
     def has_held_membership(self):
         # if membership.Membership.query.filter_by(holder_id=self.object_id):
@@ -257,8 +262,8 @@ class User(DB.Model):
         Returns:
             (bool) whether the candidate password matches the stored hash
         """
-        # return BCRYPT.check_password_hash(self.password_hash, candidate)
-        return check_password_hash(self.password_hash, candidate)
+        return BCRYPT.check_password_hash(self.password_hash, candidate)
+        # return check_password_hash(self.password_hash, candidate)
 
     def set_password(self, password):
         """Set the password for the user.
@@ -268,8 +273,8 @@ class User(DB.Model):
         Args:
             password: (str) new password for the user.
         """
-        # self.password_hash = BCRYPT.generate_password_hash(password)
-        self.password_hash = generate_password_hash(password)
+        self.password_hash = BCRYPT.generate_password_hash(password)
+        # self.password_hash = generate_password_hash(password)
 
     def promote(self):
         """Make the user an admin."""

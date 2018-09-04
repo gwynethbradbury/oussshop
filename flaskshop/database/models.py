@@ -46,3 +46,6 @@ from flaskshop.database.user import User
 # from flaskshop.database.voucher import Voucher
 # from flaskshop.database.waiting import Waiting
 # from flaskshop.database.roundup_donation import RoundupDonation
+from flaskshop.database.products import Product
+from flaskshop.database.category import Category
+from flaskshop.database.cart import Cart
