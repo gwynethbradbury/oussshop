@@ -36,7 +36,7 @@ print os.path
 
 APP.config.from_pyfile('config/default.py')
 # APP.config.from_pyfile('config/ticket_types.py')
-# APP.config.from_pyfile('config/postage.py')
+APP.config.from_pyfile('config/postage.py')
 APP.config.from_pyfile('config/payment.py')
 APP.config.from_pyfile('config/production.py')
 

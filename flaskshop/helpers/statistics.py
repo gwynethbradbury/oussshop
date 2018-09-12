@@ -136,13 +136,13 @@ def _get_payment_methods():
             (
                 name,
                 models.Ticket.query.join(
-                    models.TicketTransactionItem.query.join(
+                    models.ProductTransactionItem.query.join(
                         models.Transaction.query.filter(
                             models.Transaction.payment_method == payment_method
                         ).filter(
                             models.Transaction.paid == True
                         ).subquery(),
-                        models.TicketTransactionItem.transaction
+                        models.ProductTransactionItem.transaction
                     ).subquery(reduce_columns=True),
                     models.Ticket.transaction_items
                 ).count()

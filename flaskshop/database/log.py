@@ -21,6 +21,18 @@ LOG_MEMBERSHIP_LINK = DB.Table(
               DB.ForeignKey('membership.object_id')
              )
 )
+LOG_PRODUCT_LINK = DB.Table(
+    'log_product_link',
+    DB.Model.metadata,
+    DB.Column('log_id',
+              DB.Integer,
+              DB.ForeignKey('log.object_id')
+             ),
+    DB.Column('product_id',
+              DB.Integer,
+              DB.ForeignKey('product.object_id')
+             )
+)
 
 class Log(DB.Model):
     """Model for log entries persisted to the database."""
@@ -74,19 +86,28 @@ class Log(DB.Model):
         ),
         lazy='dynamic'
     )
+    products = DB.relationship(
+        'Product',
+        secondary=LOG_PRODUCT_LINK,
+        backref=DB.backref(
+            'events2',
+            lazy='dynamic'
+        ),
+        lazy='dynamic'
+    )
 
-    # transaction_id = DB.Column(
-    #     DB.Integer(),
-    #     DB.ForeignKey('transaction.object_id'),
-    #     nullable=True
-    # )
-    # transaction = DB.relationship(
-    #     'Transaction',
-    #     backref=DB.backref(
-    #         'events',
-    #         lazy='dynamic'
-    #     )
-    # )
+    transaction_id = DB.Column(
+        DB.Integer(),
+        DB.ForeignKey('transaction.object_id'),
+        nullable=True
+    )
+    transaction = DB.relationship(
+        'Transaction',
+        backref=DB.backref(
+            'events3',
+            lazy='dynamic'
+        )
+    )
 
     # purchase_group_id = DB.Column(
     #     DB.Integer(),
@@ -114,10 +135,12 @@ class Log(DB.Model):
     #     )
     # )
 
-    def __init__(self, ip_address, action, actor, user, memberships=None,
+    def __init__(self, ip_address, action, actor, user, memberships=None, products=None,
                  transaction=None, purchase_group=None, admin_fee=None):
         if memberships is None:
             memberships = []
+        if products is None:
+            products = []
 
         self.timestamp = datetime.datetime.utcnow()
         self.ip_address = ip_address
@@ -125,7 +148,8 @@ class Log(DB.Model):
         self.actor = actor
         self.user = user
         self.memberships = memberships
-        # self.transaction = transaction
+        self.products = products
+        self.transaction = transaction
         # self.purchase_group = purchase_group
         self.admin_fee = admin_fee
 

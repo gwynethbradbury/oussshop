@@ -1,0 +1,18 @@
+<!-- purchase/purchase_interstitial.html -->
+{% extends 'layout.html' %}
+
+{% block title %}<div class="scrollDestination">Proceed to Payment Provider</div>{% endblock %}
+
+{% block content %}
+<p>
+  Please note that once tickets have been payed for, cancellations and refunds
+  will only be made in exceptional circumstances and may be charged an administration fee.
+</p>
+<div class="div small-12 columns" style="margin-left: auto; margin-right: auto; float: none !important;">
+  {{ form|safe}}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'purchase/blocks/smoothscroll.html' %}
+{% endblock %}

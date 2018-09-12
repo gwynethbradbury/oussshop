@@ -74,9 +74,9 @@ class LogManager(object):
         )
 
     @staticmethod
-    def log_event(message, tickets=None, user=None, transaction=None,
+    def log_event(message, memberships=None,products=None, user=None, transaction=None,
                   purchase_group=None, admin_fee=None, commit=True,
-                  in_app=True):
+                  in_app=True, tickets=None):
         """Log a user action to the database.
 
         Creates a log entry in the database which can be found through the admin
@@ -104,15 +104,16 @@ class LogManager(object):
         if isinstance(user, login.AnonymousUserMixin):
             user = None
 
-        if tickets is None:
-            tickets = []
+        if products is None:
+            products = []
 
         entry = models.Log(
             ip_address,
             message,
             actor,
             user,
-            tickets,
+            memberships,
+            products,
             transaction,
             purchase_group,
             admin_fee

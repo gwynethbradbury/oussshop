@@ -79,7 +79,7 @@ APP.register_blueprint(all_views.SHOP)
 APP.register_blueprint(all_views.DASHBOARD)
 # APP.register_blueprint(all_views.FRONT)
 # APP.register_blueprint(all_views.GROUP_PURCHASE)
-# APP.register_blueprint(all_views.PURCHASE)
+APP.register_blueprint(all_views.PURCHASE)
 
 @APP.route('/old')
 def router():

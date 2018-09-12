@@ -9,9 +9,9 @@ import flask
 
 # from eisitirio import app
 app=flask.current_app
-from eisitirio.database import db
-from eisitirio.database import models
-from eisitirio.logic import realex_logic
+from flaskshop.database import db
+from flaskshop.database import models
+from flaskshop.logic import realex_logic
 
 def get_transaction(payment_method, tickets=None, postage_option=None,
                     admin_fee=None):
@@ -94,7 +94,7 @@ def do_payment(tickets, postage_option, payment_method, payment_term,
     db.DB.session.add(transaction)
 
     db.DB.session.add_all(
-        models.TicketTransactionItem(transaction, ticket)
+        models.ProductTransactionItem(transaction, ticket)
         for ticket in tickets
     )
 

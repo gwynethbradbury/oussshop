@@ -23,7 +23,7 @@ from flaskshop.database.affiliation import Affiliation
 # from flaskshop.database.battels import Battels
 # from flaskshop.database.battels_transaction import BattelsTransaction
 # from flaskshop.database.card_transaction import CardTransaction
-# from flaskshop.database.paypal_transaction import PayPalTransaction
+from flaskshop.database.paypal_transaction import PayPalTransaction
 from flaskshop.database.college import College
 # from flaskshop.database.dietary_requirements import DietaryRequirements
 # from flaskshop.database.eway_transaction import EwayTransaction
@@ -37,11 +37,11 @@ from flaskshop.database.photo import Photo
 # from flaskshop.database.statistic import Statistic
 # from flaskshop.database.ticket import Ticket
 from flaskshop.database.membership import Membership
-# from flaskshop.database.ticket_transaction_item import TicketTransactionItem
-# from flaskshop.database.transaction import DummyTransaction
-# from flaskshop.database.transaction import FreeTransaction
-# from flaskshop.database.transaction import Transaction
-# from flaskshop.database.transaction_item import TransactionItem
+from flaskshop.database.product_transaction_item import ProductTransactionItem
+from flaskshop.database.transaction import DummyTransaction
+from flaskshop.database.transaction import FreeTransaction
+from flaskshop.database.transaction import Transaction
+from flaskshop.database.transaction_item import TransactionItem
 from flaskshop.database.user import User
 # from flaskshop.database.voucher import Voucher
 # from flaskshop.database.waiting import Waiting

@@ -21,6 +21,6 @@ from flaskshop.views.shop import SHOP
 from flaskshop.views.dashboard import DASHBOARD
 # from flaskshop.views.front import FRONT
 # from flaskshop.views.group_purchase import GROUP_PURCHASE
-# from flaskshop.views.purchase import PURCHASE
+from flaskshop.views.purchase import PURCHASE
 # from flaskshop.views.api import API
 #

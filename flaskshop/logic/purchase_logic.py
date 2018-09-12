@@ -11,14 +11,14 @@ import flask
 import flask_login as login
 # from flask.ext import login
 
-from eisitirio import app
-from eisitirio.database import models, db
-from eisitirio.helpers import postage_option
+from flaskshop import app
+from flaskshop.database import models, db
+from flaskshop.helpers import postage_option
 
 LARGE_NUMBER = 999999
 APP = flask.current_app#app.APP
 #DB = db.DB
-from eisitirio.app import eisitiriodb as DB
+from flaskshop.app import oussshopdb as DB
 
 _TicketInfo = collections.namedtuple(
     "TicketInfo",
@@ -239,6 +239,28 @@ def validate_tickets(ticket_info, num_tickets):
 
     return flashes
 
+def validate_objects(object_info, num_objects):
+    """Validate the number of objects selected by the user and the names."""
+    flashes = []
+
+    total_object_count = 0
+
+    for object in object_info:
+        ordered = num_objects[object.name]
+
+        if ordered > 3:
+            flashes.append("You can order at most {0} of {1}.".format(
+                3,
+                object.name
+            ))
+
+        total_object_count += ordered
+
+    if total_object_count == 0:
+        flashes.append("You haven't ordered anything.")
+
+    return flashes
+
 def _to_list(*args):
     """Convert a list to a comma separated string with an oxford comma."""
     argc = len(args)
@@ -261,6 +283,17 @@ def create_tickets(user, ticket_info, num_tickets):
 
 
     return tickets
+
+def create_objects(user, object_info, num_objectss):
+    """Create the ticket objects from the user's selection."""
+    objects = [
+        models.Product(user, object.name, object._price)
+        for object, _ in object_info
+        for _ in xrange(num_objectss[object.name])
+    ]
+
+
+    return objects
 
 def check_payment_method(flashes):
     """Validate the payment method selected in the purchase form.

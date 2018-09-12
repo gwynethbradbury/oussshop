@@ -9,13 +9,13 @@ import flask_login as login
 # from flask.ext import login
 import flask
 
-from eisitirio import app
-from eisitirio.database import db
-from eisitirio.database import models
+from flaskshop import app
+from flaskshop.database import db
+from flaskshop.database import models
 
 APP = flask.current_app#app.APP
 #DB = db.DB
-from eisitirio.app import eisitiriodb as DB
+from flaskshop.app import oussshopdb as DB
 
 def cancel_tickets(tickets, quiet=False):
     """Cancel a set of tickets.
@@ -55,7 +55,7 @@ def cancel_tickets(tickets, quiet=False):
 
         for ticket in tickets:
             DB.session.add(
-                models.TicketTransactionItem(
+                models.ProductTransactionItem(
                     refund_transaction,
                     ticket,
                     is_refund=True

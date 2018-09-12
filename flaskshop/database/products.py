@@ -90,6 +90,6 @@ class Product(DB.Model):
 def get_static(category_id):
     """Get static instances of the category model."""
     return [
-        Product('Classx8',category_id=category_id,description="block of 8 classes",price=30),
+        Product('Classx8',category_id=category_id,description="block of 8 classes",price=3000),
 
     ]

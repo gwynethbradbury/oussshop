@@ -1,0 +1,184 @@
+<!-- purchase/purchase_home.html -->
+{% extends 'layout.html' %}
+
+{% block title %}<div class="scrollDestination">Checkout</div>{% endblock %}
+
+{% block content %}
+      <section id="purchase" class="columns">
+          <form action="{{ url_for('purchase.purchase_home') }}" id="purchase_form" method="post">
+              <ul id="purchase_steps">
+                <div class="rows">
+                  <div class="col-sm-12 col-lg-6">
+                  <li>
+                      <h5>Basket Contents...</h5>
+                  </li>
+
+                  <table class="table">
+                      <thead>
+                          <th>Item</th>
+                          <th>Price</th>
+                          <th>Number</th>
+                      </thead>
+                      {% for object in products %}
+                          <tr>
+                              <td>{{ object.name }}</td>
+                              <td>&pound;{{ object.price_pounds }}</td>
+                              <td name="num_tickets_{{ object.name }}" id="num_tickets_{{ object.name }}" class="num_ticket_input" min="0" max="3" >{{ num_tickets[object.name] }}</td>
+                          </tr>
+                      {% endfor %}
+                      <tr>
+                          <td>Total:</td>
+                          <td id="total_value2">&pound;{{ totalPrice }}</td>
+                          <td id="total_tickets2">{{ totalObjects }}</td>
+                      </tr>
+                      <!--<tr id="group_discount_message" style="display: none;"></tr>-->
+                  </table>
+
+                </div>
+                <!--<div class="col-sm-12 col-lg-6">-->
+                  <!--<li>-->
+                      <!--<h5>Apply voucher code</h5>-->
+                      <!--<p>If you have been given a discount code, please enter it here. If you do not have a code, leave this field blank. Only one discount code may be used per order</p>-->
+                      <!--<div class="row">-->
+                          <!--<div class="columns">-->
+                              <!--<label for="voucher_code">Discount Code:</label>-->
+                              <!--<input type="text" name="voucher_code" id="voucher_code" {% if form and form['voucher_code'] %}value="{{ form['voucher_code'] }}" {% endif %}/>-->
+                              <!--<div id="voucher_message" style="display: none;"></div>-->
+                          <!--</div>-->
+                      <!--</div>-->
+                  <!--</li>-->
+                <!--</div>-->
+                <div class="col-sm-12">
+                  {% include 'purchase/blocks/choose_postage_method.html' %}
+                </div>
+                <div class="col-sm-12">
+                  {% include 'purchase/blocks/choose_roundup_donation.html' %}
+                </div>
+                <div class="col-sm-12">
+                  {% include 'purchase/blocks/choose_payment_method.html' %}
+                </div>
+                <div class="col-sm-12" style="margin-top: 2rem;">
+                  <input type="submit" value="Purchase" class="button" />
+                </div>
+              </div>
+            </ul>
+          </form>
+        </section>
+  {% endblock %}
+
+{% block javascripts %}
+    {% include 'purchase/blocks/smoothscroll.html' %}
+
+    <script type="text/javascript">
+        String.prototype.toInt = function(){
+            return parseInt(this, 10);
+        }
+
+        var ticket_info = {{ ticket_info.to_json()|safe }};
+
+        var num_ticket_inputs = $(".num_ticket_input")
+
+        var group_discount_message = $("#group_discount_message");
+
+        num_ticket_inputs.on("change", function () {
+            var guest_tickets_ordered = 0;
+            var total_tickets_ordered = 0;
+            var total_value = 0;
+
+            $(ticket_info.ticket_types).each(function(_, ticket_type) {
+                var input = $("#num_tickets_" + ticket_type.slug);
+
+                var ordered = input.val().toInt();
+                var max = input.attr("max").toInt();
+
+                if (ordered > max) {
+                    ordered = max;
+                    input.val(max);
+                }
+
+                if (ticket_type.counts_towards_guest_limit)
+                    guest_tickets_ordered = guest_tickets_ordered + ordered;
+
+                total_tickets_ordered = total_tickets_ordered + ordered;
+
+{#                TODO: CHECK THAT THIS APPLIES TO THE TOTAL#}
+                var p = ticket_type.price;
+                group_discount_message.hide(0);
+                if (ticket_type.slug.includes('tandard') && ordered>={{ template_config['GROUP_SIZE'] }}){
+                    if(ordered>={{ template_config['GROUP_SIZE2'] }}){
+                        p = 1600;
+                        var msg="group rate ({{ template_config['GROUP_SIZE2'] }}+) £{{ template_config['GROUP_TICKET_PRICE2'] }}"
+                    }
+                    else{
+                        p = 1800;
+                        var msg="group rate ({{ template_config['GROUP_SIZE'] }}+) £{{ template_config['GROUP_TICKET_PRICE'] }}"
+                    }
+
+                    group_discount_message.html(msg);
+                    group_discount_message.show(0);
+                }
+                total_value = total_value + ordered * p;
+            });
+
+
+            var price_str = total_value + "";
+            while (price_str.length < 3) price_str = "0" + price_str;
+
+            $("#total_value").html("&pound;" + price_str.slice(0, -2) + "." + price_str.slice(-2));
+            $("#total_tickets").html(total_tickets_ordered);
+            //$("#roundup_donation_amt").html(total_tickets_ordered);
+
+            var guest_tickets_available = ticket_info.guest_tickets_available - guest_tickets_ordered;
+            var total_tickets_available = ticket_info.total_tickets_available - total_tickets_ordered;
+
+            $(ticket_info.ticket_types).each(function(_, ticket_type) {
+                var input = $("#num_tickets_" + ticket_type.slug);
+
+                var ordered = input.val().toInt();
+                var limit = Math.min(
+                    ticket_type.purchase_limit,
+                    ordered + total_tickets_available
+                );
+
+                if (ticket_type.counts_towards_guest_limit)
+                    limit = Math.min(limit, ordered + guest_tickets_available)
+
+                input.attr("max", Math.max(0, limit));
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var voucher_code = $("#voucher_code");
+        var voucher_message = $("#voucher_message");
+
+        voucher_code.on("blur", function() {
+            if (voucher_code.val() != '') {
+                jQuery.ajax(
+                    '{{ url_for('ajax.validate_voucher', _external=True) }}',
+                    {
+                        'data': {
+                            'code': voucher_code.val()
+                        },
+                        'type': 'POST',
+                        'dataType': 'json',
+                        'success': function(data, code, xhr) {
+                            voucher_message.attr(
+                                "class",
+                                data.class
+                            );
+                            voucher_message.html(data.message);
+                            voucher_message.show(0);
+                        }
+                    }
+                );
+            } else {
+                voucher_message.hide(0);
+            }
+        });
+
+        voucher_code.on("change", function() {
+            voucher_message.hide(0);
+        });
+    </script>
+    {% include 'purchase/blocks/script_show_postage_address.html' %}
+{% endblock %}

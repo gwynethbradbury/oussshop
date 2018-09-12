@@ -12,12 +12,12 @@ import flask_login as login
 import flask
 import requests
 
-from eisitirio import app
-from eisitirio.database import db
-from eisitirio.database import models
+from flaskshop import app
+from flaskshop.database import db
+from flaskshop.database import models
 
 APP = flask.current_app#app.APP#DB = db.DB
-from eisitirio.app import eisitiriodb as DB
+from flaskshop.app import oussshopdb as DB
 
 class SHA1CheckError(Exception):
     """Risen on SHA1hashes mismatch """
