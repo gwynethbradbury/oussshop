@@ -25,6 +25,12 @@ class Product(DB.Model):
         nullable=False
     )
 
+    lot_of = DB.Column(
+        DB.Integer(),
+        nullable=False,
+        default=1
+    )
+
     description = DB.Column(
         DB.Text(),
         nullable=False
@@ -57,12 +63,13 @@ class Product(DB.Model):
 
     stock=1000
 
-    def __init__(self, name, category_id,description="a thing", price=1):
+    def __init__(self, name, category_id,description="a thing", price=1,lot=1):
         self.name = name
         self.price = price
         self.category_id = category_id
         self.photo=None
         self.description = description
+        self.lot_of=lot
 
     def __repr__(self):
         return '<Product {0}: {1}>'.format(self.object_id, self.name)
@@ -90,6 +97,7 @@ class Product(DB.Model):
 def get_static(category_id):
     """Get static instances of the category model."""
     return [
-        Product('Classx8',category_id=category_id,description="block of 8 classes",price=3000),
+        Product('Classx10',category_id=category_id,description="block of 8 classes",price=3000,lot=10),
+        Product('Class',category_id=category_id,description="block of 8 classes",price=400),
 
     ]

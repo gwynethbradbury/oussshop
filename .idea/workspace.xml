@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe08ee5e-cfa1-4745-9c40-8bf527d1f68c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/config/postage.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/eway_transaction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/paypal_transaction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/transaction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/database/transaction_item.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/blocks/choose_payment_method.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/blocks/choose_postage_method.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/blocks/choose_roundup_donation.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/blocks/script_show_postage_address.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/blocks/smoothscroll.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/buy_postage.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/cancel.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/complete_payment.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/pay_admin_fee.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/payment_interstitial.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/payment_paypal.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/payment_processed.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/purchase_home.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/resell.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/upgrade.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/templates/purchase/wait.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flaskshop/views/purchase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/app.py" afterPath="$PROJECT_DIR$/flaskshop/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/config/default.py" afterPath="$PROJECT_DIR$/flaskshop/config/default.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/log.py" afterPath="$PROJECT_DIR$/flaskshop/database/log.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/models.py" afterPath="$PROJECT_DIR$/flaskshop/database/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/database/products.py" afterPath="$PROJECT_DIR$/flaskshop/database/products.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/dbconfig.py" afterPath="$PROJECT_DIR$/flaskshop/dbconfig.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/helpers/log_manager.py" afterPath="$PROJECT_DIR$/flaskshop/helpers/log_manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/helpers/statistics.py" afterPath="$PROJECT_DIR$/flaskshop/helpers/statistics.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/logic/cancellation_logic.py" afterPath="$PROJECT_DIR$/flaskshop/logic/cancellation_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/logic/payment_logic.py" afterPath="$PROJECT_DIR$/flaskshop/logic/payment_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/logic/paypal_logic.py" afterPath="$PROJECT_DIR$/flaskshop/logic/paypal_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/logic/purchase_logic.py" afterPath="$PROJECT_DIR$/flaskshop/logic/purchase_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/logic/realex_logic.py" afterPath="$PROJECT_DIR$/flaskshop/logic/realex_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/system.py" afterPath="$PROJECT_DIR$/flaskshop/system.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flaskshop/views/all_views.py" afterPath="$PROJECT_DIR$/flaskshop/views/all_views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setupdb.py" afterPath="$PROJECT_DIR$/setupdb.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,8 +12,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/flaskshop$setupdb.coverage" NAME="setupdb Coverage Results" MODIFIED="1536766487743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flaskshop$system.coverage" NAME="system Coverage Results" MODIFIED="1536766752264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskshop" />
+    <SUITE FILE_PATH="coverage/flaskshop$setupdb.coverage" NAME="setupdb Coverage Results" MODIFIED="1536854404303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskshop$system.coverage" NAME="system Coverage Results" MODIFIED="1536853850744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskshop" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -75,7 +36,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="purchase.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="purchase.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/flaskshop/views/purchase.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="432">
@@ -83,6 +44,16 @@
                   <folding>
                     <element signature="e#62#101#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="products.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/flaskshop/database/products.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="447">
+                  <caret line="99" column="25" lean-forward="false" selection-start-line="99" selection-start-column="25" selection-end-line="99" selection-end-column="25" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -117,24 +88,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="product_transaction_item.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/flaskshop/database/product_transaction_item.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="1" column="44" lean-forward="false" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
-                  <folding>
-                    <element signature="e#83#122#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="setupdb.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/setupdb.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="383">
-                  <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
-                  <folding />
+                <state relative-caret-position="340">
+                  <caret line="62" column="24" lean-forward="true" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#0#27#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -295,7 +256,6 @@
         <option value="$PROJECT_DIR$/flaskshop/config/postage.py" />
         <option value="$PROJECT_DIR$/flaskshop/logic/purchase_logic.py" />
         <option value="$PROJECT_DIR$/flaskshop/database/transaction.py" />
-        <option value="$PROJECT_DIR$/flaskshop/database/products.py" />
         <option value="$PROJECT_DIR$/flaskshop/templates/purchase/purchase_home.html" />
         <option value="$PROJECT_DIR$/flaskshop/database/log.py" />
         <option value="$PROJECT_DIR$/flaskshop/database/paypal_transaction.py" />
@@ -307,6 +267,7 @@
         <option value="$PROJECT_DIR$/flaskshop/database/transaction_item.py" />
         <option value="$PROJECT_DIR$/flaskshop/helpers/log_manager.py" />
         <option value="$PROJECT_DIR$/flaskshop/views/purchase.py" />
+        <option value="$PROJECT_DIR$/flaskshop/database/products.py" />
       </list>
     </option>
   </component>
@@ -500,7 +461,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.system">
+  <component name="RunManager" selected="Python.setupdb">
     <configuration default="false" name="setupdb" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -687,8 +648,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.system" />
-        <item index="1" class="java.lang.String" itemvalue="Python.setupdb" />
+        <item index="0" class="java.lang.String" itemvalue="Python.setupdb" />
+        <item index="1" class="java.lang.String" itemvalue="Python.system" />
       </list>
     </recent_temporary>
   </component>
@@ -995,7 +956,7 @@
         <state relative-caret-position="345">
           <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
           <folding>
-            <element signature="e#40#79#0" expanded="true" />
+            <element signature="e#40#79#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1057,16 +1018,8 @@
         <state relative-caret-position="1110">
           <caret line="74" column="24" lean-forward="true" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
           <folding>
-            <element signature="e#79#118#0" expanded="true" />
+            <element signature="e#79#118#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskshop/database/products.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="92" column="93" lean-forward="false" selection-start-line="92" selection-start-column="93" selection-end-line="92" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1139,14 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setupdb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flaskshop/logic/payment_logic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1210,6 +1155,24 @@
           <folding>
             <element signature="e#62#101#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setupdb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="62" column="24" lean-forward="true" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskshop/database/products.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="99" column="25" lean-forward="false" selection-start-line="99" selection-start-column="25" selection-end-line="99" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
