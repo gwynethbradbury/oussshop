@@ -69,6 +69,7 @@ u=User('admin@admin','admin','admin','admin','0',
        College.query.all()[0],
        Affiliation.query.all()[0],None)
 u.verified=True
+u.prepaid_classes=10
 
 db.session.add(u)
 db.session.commit()

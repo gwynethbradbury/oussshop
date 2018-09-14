@@ -34,7 +34,7 @@ def dashboard_home():
     if login.current_user.has_membership():# and login.current_user.held_membership.barcode:
         memberships = login.current_user.memberships
         return flask.render_template('dashboard/dashboard_home.html',
-            barcode=base64.b64encode(create_qr_codes.generate_ticket_qr(memberships[0])))
+            barcode=base64.b64encode(create_qr_codes.generate_membership_qr(memberships[0])))
     else:
         return flask.render_template('dashboard/dashboard_home.html')
 

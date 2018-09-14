@@ -1,0 +1,25 @@
+<!-- admin_tickets/validate_ticket.html -->
+{% extends 'shoplayout.html' %}
+
+{% block title %}Validate Ticket{% endblock %}
+
+
+<!--{% block navigation %}-->
+<!--<nav class="row">-->
+    <!--<div class="large-12 columns">-->
+        <!--<ul id="navigation-main">-->
+            <!--<li><a href="{{ url_for('dashboard.dashboard_home') }}">Dashboard Home</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</nav>-->
+<!--{% endblock %}-->
+
+{% block content %}
+    <section id="validate_ticket" class="columns">
+        <form action="{{ url_for('admin_tickets.confirm_use_class', membership_id=membership_id,barcode=barcode) }}" method="post">
+            <label for="password">Admin password</label>
+            <input name="password" type="password"/>
+            <input type="submit" value="Use class"/>
+        </form>
+    </section>
+{% endblock %}

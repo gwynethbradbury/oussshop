@@ -14,7 +14,7 @@ from flaskshop.views.shop import SHOP
 # from flaskshop.views.admin_data import ADMIN_DATA
 # from flaskshop.views.admin_photos import ADMIN_PHOTOS
 # from flaskshop.views.admin_postage import ADMIN_POSTAGE
-# from flaskshop.views.admin_tickets import ADMIN_TICKETS
+from flaskshop.views.admin_tickets import ADMIN_TICKETS
 # from flaskshop.views.admin_users import ADMIN_USERS
 # from flaskshop.views.admin_vouchers import ADMIN_VOUCHERS
 # from flaskshop.views.ajax import AJAX

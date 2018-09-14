@@ -72,6 +72,7 @@ class Membership(DB.Model):
         nullable=True
     )
 
+
     def __init__(self, owner, membership_type, price):
         self.owner = owner
         self.membership_type = membership_type

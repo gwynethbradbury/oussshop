@@ -84,6 +84,21 @@ def generate_ticket_qr(ticket):
     qrcode_img.png(buffer, scale=20)
     return buffer.getvalue()
 
+def generate_membership_qr(membership):
+    """
+    Generate the QR code for the membership. We don't store the
+    QR codes since that's just a waste of space. Instead, the 'barcode' field
+    for the ticket serves as the UUID for the membership, and we match this up with
+    the membership 'object_id'. This way, people can't go and make their own ticket
+    QR codes.
+    """
+    qrcode_img = pyqrcode.create('{0}admin/ticket/use-class/{1}/{2}'.format(app.APP.config['EISITIRIO_URL'],
+                                                                            membership.object_id,
+                                                                            membership.barcode))
+    buffer = io.BytesIO()
+    qrcode_img.png(buffer, scale=20)
+    return buffer.getvalue()
+
 def send_claim_code(user,ticket):
     """Send qr code to user that paid for ticket"""
 
